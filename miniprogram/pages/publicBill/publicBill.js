@@ -1,4 +1,4 @@
-// pages/deployFunctions/deployFunctions.js
+// miniprogram/pages/publicBill/publicBill.js
 Page({
 
   /**
