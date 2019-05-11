@@ -8,28 +8,28 @@ Page({
     // logged: false,
     // takeSession: false,
     // requestResult: ''
-    state:[
-    {path:'../../image/bed.png' , name:'睡觉',width:59,height:62},
-    {path:'../../image/study.png' , name:'学习',width:45,height:62},
-    {path:'../../image/fun.png' , name:'娱乐',width:64,height:62},
-    {path:'../../image/outdoor.png' , name:'外出',width:64,height:62}
+    state: [
+      { path: '../../image/bed.png', name: '睡觉', width: 59, height: 62 },
+      { path: '../../image/study.png', name: '学习', width: 45, height: 62 },
+      { path: '../../image/fun.png', name: '娱乐', width: 64, height: 62 },
+      { path: '../../image/outdoor.png', name: '外出', width: 64, height: 62 }
     ],
-    left:180,
-    Users:[
-    {},{}
+    left: 180,
+    Users: [
+      {}, {}
     ]
   },
 
-  ChangeState:function(e){
-    var left=this.left
-    var clientX=e.touches[0].clientX
+  ChangeState: function (e) {
+    var left = this.left
+    var clientX = e.touches[0].clientX
 
 
-    left=e.touches[0].clientX
-    this.setData({ left:left })
+    left = e.touches[0].clientX
+    this.setData({ left: left })
 
   },
-  TopublicBill:function(){
+  TopublicBill: function () {
     wx.navigateTo({
       url: '../../pages/publicBill/publicBill',
     })
