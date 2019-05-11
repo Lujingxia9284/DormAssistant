@@ -1,1 +1,7 @@
-/* miniprogram/pages/nonPayment/nonPayment.wxss */
+@import "../../colorui/main.wxss";
+@import "../../colorui/icon.wxss";
+
+.avatar{
+    height:80rpx;
+    width:80rpx;
+}

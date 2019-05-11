@@ -1,1 +1,146 @@
-/* miniprogram/pages/publicBill/publicBill.wxss */
+@import "../../colorui/main.wxss";
+@import "../../colorui/icon.wxss";
+Page{
+    height:100%;
+}
+
+.container{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+    width:750rpx;
+}
+/* 加号和付款金额 */
+.head{
+    display:flex;
+    width:750rpx;
+    height:260rpx;
+    margin-top:30rpx;
+    padding-left:60rpx;
+}
+.head .plus{
+    height:240rpx;
+    width:240rpx;
+    display:flex;
+    align-items: center;
+    justify-content:center;
+}
+/* 添加账单 */
+
+.head .plus image{
+
+    height:150rpx;
+    width:150rpx;
+}
+/* ---- */
+.head .payment{
+    flex:1;
+    height:240rpx;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+.head .payment .Count{
+    display:flex;
+    height:50rpx;
+    font-size:36rpx;
+    color:#999;
+    margin:12rpx 4rpx;
+
+}
+.Count .num{
+    margin-left:50rpx;
+}
+
+/* 账单详细 */
+.middle{
+    height:841rpx;
+    width:750rpx;
+    display:flex;
+    flex-direction:column;
+}
+
+.middle .bills{
+    display:flex;
+    flex-direction:row;
+    width:750rpx;
+    height:160rpx;
+}
+
+.bills .date{
+    width:115rpx;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-left:30rpx;
+    color:#999;
+    font-size:30rpx;
+}
+
+.bills .line{
+    width:20rpx;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.bills .line image{
+    width:20rpx;
+    height:120rpx;
+}
+
+.bills .part{
+    width:105rpx;
+    margin-left:5rpx;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-bottom:1rpx solid #999;
+}
+/* 数组最后一个没有下划线 */
+.bills .part.last{
+    border:0;
+}
+
+.bills .part image{
+    width:48rpx;
+    height:58rpx;
+}
+
+.bills .content{
+    width:340rpx;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    border-bottom:1rpx solid #999;
+}
+.bills .content.last{
+    border:0;
+}
+.bills .content .name{
+    height:36rpx;
+    margin-left:10rpx;
+    font-size:34rpx;
+    color:#6c9;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+}
+
+.bills .finish{
+    width:120rpx;
+    margin-right:40rpx;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-bottom:1rpx solid #999;
+}
+.bills .finish.last{
+    border:0;
+}
+
+
+.bills .finish image{
+    width:121rpx;
+    height:42rpx;
+}

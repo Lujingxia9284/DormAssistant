@@ -1,2 +1,53 @@
-<!--miniprogram/pages/publicBill/publicBill.wxml-->
-<text>miniprogram/pages/publicBill/publicBill.wxml</text>
+<view class="container">
+    <view class="head">
+        <!-- 加号图案 -->
+        <view class="plus">
+            <image src="../../image/plus.png"></image>
+        </view>
+        <!-- 付款 -->
+        <view class="payment">
+            <view class="Count" wx:for="{{ bill }}">
+                <view class="person">
+                    {{ item.person }}
+                </view>
+                <view class="num">
+                    {{ item.num }}
+                </view>
+            </view>
+        </view>
+    </view>
+
+
+    <view class="middle">
+        <view class="bills" wx:for="{{ billpart }}" wx:for-index="idx">
+        <!-- 每一列账单由 日期+分割线+账单种类+金额+结款or用户头像 -->
+
+            <view class="date" >
+                {{item.date}}
+            </view>
+            <view class="line">
+                <image src="{{ item.line }}"></image>
+            </view>
+            <!-- 如果是数组最后一个就不出现下划线 -->
+            <view class="part{{ idx == num-1 ? ' last' : '' }}">
+                <image src="{{ item.img }}"></image>
+            </view>
+            <view class="content{{ idx == num-1 ? ' last' : '' }}">
+            <!-- 内容由账单的名字和金额组成 -->
+                <view class="name">
+                    {{ item.name }}
+                </view>
+                <view class="name">
+                    {{ item.money }}
+                </view>
+            </view>
+            <view  class="finish{{ idx == num-1 ? ' last' : '' }}" >
+                <image src="{{ item.finish }}"></image>
+            </view>
+        </view>
+
+    </view>
+    <view class="flex justify-center margin-bottom-lg" >
+        <button type="" style="width:475rpx;background-color: #6c9;" class="cu-btn bg-olive round lg shadow">我的未付款</button>
+    </view>
+</view>
