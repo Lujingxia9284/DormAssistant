@@ -1,6 +1,8 @@
 {
   "usingComponents": {
-    "calendar": "plugin://calendar/calendar"
+    "calendar": "plugin://calendar/calendar",
+    "my-modal": "../../../component/modal/modal"
+
    
   },
   "navigationBarTitleText": "值日表"

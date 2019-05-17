@@ -1,7 +1,110 @@
+@import "../../colorui/main.wxss";
+@import "../../colorui/icon.wxss";
 
+/* 两个按钮的布局 */
 
-
-.dotcolor-o{
-    background-color: #188be4 !mportant;  
+.btnview {
+  flex-direction: column;
+  width: 100%;
+  position: fixed;
+  bottom: 30rpx;
 }
 
+/* 直线样式 */
+
+.line {
+  margin: 0 auto;
+  width: 700rpx;
+  height: 3rpx;
+  justify-content: center;
+  background-color: #999;
+}
+
+/* 滚动视图样式 */
+
+.out {
+  background: white;
+  padding: 10rpx 30rpx;
+  width: 520rpx;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+/*设置行内块*/
+
+.out  .item {
+  width: 80rpx;
+  height: 180rpx;
+  /* border: 1px solid red; */
+  background: white;
+  display: inline-block;
+  margin-right: 18px;
+}
+
+/* 值日周期模态框设置 */
+
+.container {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.duty-circle {
+  padding-left: 42rpx;
+  /* padding-right:10px; 右内边距 */
+  padding-top: 60rpx;
+  padding-bottom: 60rpx;
+}
+
+.duty-er {
+  padding-left: 42rpx;
+  padding-right: 50rpx;
+  padding-top: 60rpx;
+  padding-bottom: 60rpx;
+}
+
+
+.button{
+  bottom: 30rpx;
+}
+.touxiang{
+  padding-top: 20rpx
+}
+
+.switch{
+  
+  padding-left:430rpx;
+}
+
+/* 时间选择器布局 */
+.time{
+  padding-left: 21rpx;
+  padding-right: 420rpx;
+  padding-top: 60rpx;
+  padding-bottom: 60rpx;
+
+}
+
+/* 复选框布局 */
+.fxk1 {
+  padding-left: 20rpx;
+}
+
+.fxk2{
+  padding-left:80rpx;
+}
+
+
+
+.color{
+	width: 100%; 
+	height: 50px;
+	color: #e9c565;
+	font-size:22pt;
+	text-align: center;
+	padding: 0 10px;
+	box-sizing: border-box;
+}
+picker-view-column{
+	margin: 0 3px;	
+	background: linear-gradient(to bottom,#212121, #aaaaaa,  black);
+}

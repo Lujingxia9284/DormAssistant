@@ -30,12 +30,40 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
 					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide"
+					"pathName": "pages/databaseGuide/databaseGuide",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "值日表",
+					"pathName": "pages/dutyRoster/dutyRoster",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "首页",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "publicBill",
+					"pathName": "pages/publicBill/publicBill",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "model",
+					"pathName": "pages/model",
+					"scene": null
 				}
 			]
 		}

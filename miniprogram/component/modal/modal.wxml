@@ -1,0 +1,7 @@
+<!--遮罩层-->
+<view class='mask' wx:if="{{showModalStatus}}" bindtap='closeModal' style="opacity:{{opacity}}"></view>
+<!--弹出模态框-->
+<view class='mymodal' wx:if="{{showModalStatus}}" 
+style='width:{{width}};height:{{height}};top:{{top}};bottom:{{bottom}};left:{{left}};right:{{right}}'>
+  <slot></slot> 
+</view>

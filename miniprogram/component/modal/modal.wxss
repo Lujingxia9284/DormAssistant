@@ -1,0 +1,25 @@
+/*遮罩层*/
+.mask{
+  position: fixed;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.5);
+  top:0;left:0;
+  z-index: 10;transition: all 300ms ease-out;
+}
+/*弹出模态框*/
+.mymodal{
+  width:100%;
+  position: fixed;z-index: 20;
+  background:white;height:920rpx;
+  transition: all 300ms ease-out;
+}
+.mymodal .mymodal-title{
+  font-size:30rpx;height:100rpx;line-height:100rpx;
+  border-bottom:2rpx solid #ddd;
+  color:#666;padding:0 40rpx;
+  display: flex;justify-content:space-between;
+  align-items: center
+}
+.mymodal .mymodal-content{
+  padding:30rpx;height:640px;overflow: scroll;
+}

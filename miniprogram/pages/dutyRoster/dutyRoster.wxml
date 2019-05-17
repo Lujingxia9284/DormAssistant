@@ -1,26 +1,131 @@
-<calendar 
-cur-year="{{curYear}}"
-cur-month="{{curMonth}}" 
-day="{{day}}" 
-header_show='{{header_show}}' 
-
-next='{{next}}'
-appear='{{appear}}'
-closelaststyle='{{closelaststyle}}'
-colored='{{colored}}'
-
-prev='{{prev}}' 
-next='{{next}}'
-speciallist='{{speciallist}}' 
-selectedDate='{{selectedDate}}'
-mystatus='{{mystatus}}' 
-circle_show="{{false}}"
+<calendar cur-year="{{curYear}}" cur-month="{{curMonth}}" day="{{day}}" header_show='{{header_show}}' next='{{next}}' appear='{{appear}}' closelaststyle='{{closelaststyle}}' colored='{{colored}}' prev='{{prev}}' next='{{next}}' speciallist='{{speciallist}}'
+  selectedDate='{{selectedDate}}' mystatus='{{mystatus}}' circle_show="{{false}}" />
 
 
 
+<view class="btnview">
+  <view class="flex justify-center margin-bottom-lg">
+    <button type="" style="width:475rpx;background-color: #6c9;" class="cu-btn bg-olive round lg shadow" bindtap="showModalDuty">值日周期</button>
+  </view>
+  <my-modal id="modalDuty" fadeStyle="slideUp" height="590rpx">
+    <view>
+      <!-- 模态框内容 -->
+      <view class='container'>
+      
+      
+        <view class='duty-circle'>值日周期</view>
+       
+        
+         
+        
+        
+       <radio-group class='fxk'>
+        
+        
+
+				<radio class='fxk2'></radio>
+       
+       <text class='fxk1'>2天1人</text>
+        
+				<radio class='fxk2'></radio>
+        
+        
+        <text class='fxk1'>固定日期</text>
+        
+       
+       
+		
+
+
+        </radio-group>
+        <view class='line'></view>
+
+        <view >值日生</view>
+
+        <!-- 头像 -->
+        <view class='touxiang'>
+          <view class='out'>
+            <scroll-view scroll-x scroll-into-view='item2'>
+              <view id='item1' class='item'>
+                <view class="cu-avatar xl round margin-left" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view>
+              </view>
+              <view id='item2' class='item'>
+                <view class="cu-avatar xl round margin-left" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view>
+              </view>
+              <view class='item'>
+                <view class="cu-avatar xl round margin-left" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view>
+              </view>
+              <view class='item'>
+                <view class="cu-avatar xl round margin-left" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view>
+              </view>
+              <view class='item'>
+                <view class="cu-avatar xl round margin-left" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view>
+              </view>
+              <view class='item'>
+                <view class="cu-avatar xl round margin-left" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view>
+              </view>
+            </scroll-view>
+          </view>
+        </view>
 
 
 
 
 
-/>
+      </view>
+      <view class='btnview'>
+        <view class="flex justify-center margin-bottom-lg">
+          <button type="" style="width:475rpx;background-color: #6c9;" class="cu-btn bg-olive round lg shadow" bindtap='closeModalDuty'>完成</button>
+        </view>
+      </view>
+
+    </view>
+
+
+
+  </my-modal>
+
+
+
+  <view class="flex justify-center margin-bottom-lg">
+    <button type="" style="width:475rpx;background-color: #6c9;" class="cu-btn bg-olive round lg shadow" bindtap='showModalAlert'>提醒设置</button>
+  </view>
+  <my-modal id="modalAlert" fadeStyle="slideUp" height="590rpx">
+    <!-- 模态框里的内容 -->
+    <view class='container'>
+      <view class='duty-circle'>开启提醒</view>
+      <view class='switch'>
+        <switch class="sm" bindchange="setAlert"></switch>
+      </view>
+      <view class='line'></view>
+
+
+      <!-- 提醒设置部分 -->
+      <view wx:if="{{showView}}">
+
+       
+        <view class="cu-form-group">
+        <view class='time'> 时间选择</view>
+          
+          <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="TimeChange">
+            <view class="picker">
+              {{time}}
+            </view>
+          </picker>
+        </view>
+     
+
+
+      
+
+    </view>
+    <view class='btnview'>
+        <view class="flex justify-center margin-bottom-lg">
+          <button type="" style="width:475rpx;background-color: #6c9;" class="cu-btn bg-olive round lg shadow" bindtap='closeModalAlert'>完成</button>
+        </view>
+      </view>
+    </view>
+
+  </my-modal>
+
+</view>

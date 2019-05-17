@@ -1,3 +1,5 @@
+
+
 Page({
 
   /**
@@ -18,28 +20,66 @@ Page({
     selectedDate:"",
     circle_show:false,//日期下方圆点
     mystatus: [],
+    showView:false,
+    value:6,
+    
 
+    // 时间选择器
+       time: '12:01',
+    arr1: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
    
-
   },
  
-  
+  bindChange: function (e) {
+    const val = e.detail.value
+    this.setData({
+      arr1Value: this.data.arr1[val[0]],
+      
+    })
+  },
+
+
   
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    
     var x = '2019-05-12'
     this.setData({
       speciallist: [
-        { date: [x], background: '#6c9'},
-        
+        { date: [x], background: '#6c9' },
+
       ],
-     
+
     })
-    
-    
+    this.modalDuty = this.selectComponent("#modalDuty");//通过给组件所起的id调用组件
+    this.modalAlert = this.selectComponent("#modalAlert");
   },
+  showModalDuty: function () {
+    this.modalDuty.showModal()  
+},
+  closeModalDuty:function(){
+    this.modalDuty.closeModal()  //打开关闭值日周期
+  },
+  showModalAlert: function () {
+    this.modalAlert.showModal()  
+  },
+  closeModalAlert: function () {
+    this.modalAlert.closeModal()  //打开关闭提醒设置
+  },
+  // 开启提醒绑定的函数
+  setAlert:function(){ 
+    var that = this;
+    that.setData({
+      showView: (!that.data.showView)
+    }) 
+    console.log(this.data.showView);
+    
+
+  },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
