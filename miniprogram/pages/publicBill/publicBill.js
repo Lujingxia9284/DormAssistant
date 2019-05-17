@@ -33,12 +33,29 @@ Page({
       },
     ],
     num:'',
+    Payfinish:false,
+
   },
   onLoad(options) {
     var num=this.num;
     this.setData({ num: this.data.billpart.length})
 
   },
+  ToAddBill:function(){
+    wx.navigateTo({
+      url:'../../pages/addBill/addBill'
+    })
+  },
+  TononPayment:function(){
+    wx.navigateTo({
+      url:'../../pages/nonPayment/nonPayment'
+    })
+  },
+  changeFinish:function(){
+    this.setData({
+      Payfinish : true
+    })
+  }
 
 
 })

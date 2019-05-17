@@ -1,53 +1,63 @@
-<scroll-view scroll-y>
-    <form>
-        <view class="cu-list grid col-4 no-border">
-            <view class="cu-item" wx:for="{{bills}}" wx:key >
-                <view class="padding-xs">
-                    <image class="part" src="{{ item.src }}" style="width:78rpx; height:70rpx"></image>
-                </view>
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
+    <view slot="backText">添加账单</view>
 
-                <view class="text-lg text-grey" >{{item.name}}</view>
+</cu-custom>
+<form>
+    <view class="cu-list grid col-4 no-border">
+        <view class="cu-item" wx:for="{{parts}}" wx:key bindtap="Selcethandle"
+                data-index="{{ index }}">
+            <view class="padding-xs">
+                <image class="part "
+                src="../../image/{{ partindex==index? item.part+'active' : item.part}}.png" style="width:78rpx; height:70rpx;"
+                ></image>
             </view>
-        </view>
-        <view class="flex cu-form-group justify-center padding " >
 
-                <input placeholder="添加说明....."
-                style="width:600rpx;height:56rpx;border: 1rpx solid #999;border-radius: 10rpx;">
-                </input>
-
+            <view class="text-lg text-grey" >{{item.name}}</view>
         </view>
-        <view class="cu-form-group margin-top">
-            <view class="title">日期</view>
-            <picker mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="DateChange">
-                <view class="picker">
-                    {{date}}
-                </view>
-            </picker>
-        </view>
-        <view class="cu-form-group">
-            <view class="title">金额</view>
-            <input placeholder="100" style="text-align: center;"></input>
-        </view>
-        <view class="cu-form-group">
-            <view class="title">是否平摊</view>
-            <switch></switch>
-        </view>
-        <view class="cu-form-group margin-top padding flex" >
-            <view class="basis-xs title flex-sub">成员</view>
-            <view class="basis-xl grid col-4 flex flex-center">
-                <view class="padding " wx:for="{{ 4 }}" >
-                    <image src="../../image/avt.png" style="width:80rpx;height:80rpx" ></image>
-                    <input placeholder="100" style="text-align:center;width:74rpx;padding-right:0" ></input>
-                </view>
+    </view>
+    <view class="flex cu-form-group justify-center padding " >
+            <input placeholder="添加说明....."
+            style="width:600rpx;height:56rpx;border: 1rpx solid #999;border-radius: 10rpx;">
+            </input>
+    </view>
+    <view class="cu-form-group margin-top">
+        <view class="title">日期</view>
+        <picker mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="DateChange">
+            <view class="picker">
+                {{date}}
             </view>
-        </view>
-
-        <view class="cu-form-group padding flex justify-center">
-            <view class="flex justify-center " >
-                <button type="" style="width:475rpx;background-color: #6c9;" class="cu-btn bg-olive round lg shadow">确认</button>
+        </picker>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">金额</view>
+        <input placeholder="请输入..." style="text-align: center;" bindblur="BillMoney"></input>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">是否平摊</view>
+        <switch checked bindtap="flatHandle"></switch>
+    </view>
+    <view class=" margin-top padding flex bg-white align-center" style="height:200rpx"  >
+        <view class=" margin-right-xl " style="width:120rpx">成员</view>
+        <scroll-view scroll-x class="justify-center" style="width:560rpx; white-space: nowrap;">
+            <view class="members" wx:for="{{ 7 }}" wx:key >
+                <image src="../../image/avt.png" class="avatar" bindtap="payNeed"></image>
+                <view class=" memberTag cuIcon-roundcheckfill {{ payDuty ? 'text-green' : '' }}"></view>
+                <input type=""
+                name=""
+                placeholder="{{ flat ?  billmoney/4 : '请输入' }}"
+                bindblur="PersonalCost"
+                style="text-align:center;"
+                />
             </view>
-        </view>
-    </form>
 
-</scroll-view>
+        </scroll-view>
+
+    </view>
+
+    <view class="cu-form-group padding flex justify-center">
+        <view class="flex justify-center " >
+            <button type="" style="width:475rpx;background-color: #6c9;" class="cu-btn bg-olive round lg shadow">确认</button>
+        </view>
+    </view>
+</form>
 

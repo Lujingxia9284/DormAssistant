@@ -1,3 +1,9 @@
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
+    <view slot="backText">值日表</view>
+    <!-- <view slot="content">2019年4月</view> -->
+</cu-custom>
+
+
 <calendar cur-year="{{curYear}}" cur-month="{{curMonth}}" day="{{day}}" header_show='{{header_show}}' next='{{next}}' appear='{{appear}}' closelaststyle='{{closelaststyle}}' colored='{{colored}}' prev='{{prev}}' next='{{next}}' speciallist='{{speciallist}}'
   selectedDate='{{selectedDate}}' mystatus='{{mystatus}}' circle_show="{{false}}" />
 

@@ -1,130 +1,43 @@
-Page{
-    height:100%;
-}
-.container{
-    height:100%;
-    display:flex;
+@import "../../colorui/main.wxss";
+@import "../../colorui/icon.wxss";
 
-    flex-direction:column;
-}
-/* 头部的样式表 */
-.head{
-    height:640rpx;
-    width:100%;
-    border-bottom:1rpx solid #999999;
-    display:flex;
-    flex-direction:column;
-}
-/* 四个状态的样式表 */
-.head .state{
-    display:flex;
-    margin:36rpx 26rpx 0 180rpx;
-}
-
-.head .statepart{
+.statepart{
     flex:1;
     padding:0 10rpx;
+    display:flex;
 }
 
-.head .statepart image{
+.statepart image{
     display:block;
     margin:0 auto;
 }
 
-.head .statepart text{
+.statepart text{
     display:block;
     text-align:center;
     font-size:25rpx;
     color:#66cc99;
     margin-top:5rpx;
 }
-
-/* 用户状态 */
-.UserState{
-    display:flex;
-    margin:10rpx 0 100rpx 50rpx;
-
-}
-.UserState image{
-    width:80rpx;
+.avatar{
     height:80rpx;
+    width:80rpx;
+    border-radius:50%;
 }
-/* 滚动条 */
-.UserState .scroll image{
-    display:block;
+
+.scrollBar{
     width:565rpx;
     height:18rpx;
-    margin:31rpx 0rpx 0 40rpx;
 }
-
-.scroll .point{
-    position:absolute;
-}
-/* ----- */
-/* 底部的样式表 */
-.foot{
-    flex:1;
-    display:flex;
-    flex-direction:column;
-}
-.foot .title {
-    height:60rpx;
-}
-.title text{
-    display:block;
-    text-align:center;
-    margin-top:20rpx;
-    font-size:47.333rpx;
-    color:#66cc99;
-}
-.contentAll{
-    flex:1;
-}
-
-.content{
-
-    display:flex;
-    width:635rpx;
-    flex:1;
-    border-bottom:1rpx solid #999999;
-    margin-top:100rpx;
-}
-.contengt .main{
-    flex:7;
-}
-
-.content .main text{
-    text-align:left;
-    margin:0 10rpx 0rpx 20rpx;
-    font-size:36rpx;
-    color:#353535;
-}
-.content .date{
-    flex:3;
-    margin-right:20rpx;
-    text-align:right;
+.point{
+  height:60rpx;
+  width:50rpx;
 
 }
-.content .date text{
-    color:#999999;
-
-    margin-right:10rpx;
-    font-size:30rpx;
+.announcement{
+    auto-height:true;
+    z-index: 1110;
+    left:0;
+    top:0;
 }
-.foot .bottom {
-    display:flex;
-    height:80rpx;
-    margin-bottom:30rpx;
-}
-.btn{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background-color: #6c9;
-    height:70rpx;
-    width:200rpx;
-    border-radius:50rpx;
-    color:white;
 
-
-}

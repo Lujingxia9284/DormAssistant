@@ -1,64 +1,125 @@
+<cu-custom bgColor="bg-gradual-green">
+    <view slot="content">舍佐</view>
+</cu-custom>
 
-<view class="container">
-    <!-- 用户状态栏(高度640px)-->
-    <view class="head">
-        <!-- 四个状态 -->
-        <view class="state" >
-            <view class="statepart" wx:for="{{ state }}">
+<view class="padding bg-white flex flex-direction" >
+    <!-- 四个状态 -->
+    <view class="padding-xs bg-white flex">
+        <view class="basis-xs"></view>
+        <view class="basis-xl flex">
+            <view class="statepart flex flex-direction" wx:for="{{ state }}" wx:key>
                 <image src="{{ item.path }}" style="width:{{item.width}}rpx; height:{{item.height }}rpx;"></image>
                 <text>{{ item.name }}</text>
             </view>
-
-        </view>
-        <!-- 头像和拖动栏 -->
-        <view class="UserState" wx:for="{{ Users }}">
-            <image src="../../image/circle.png" id="css" ></image>
-            <view class="scroll">
-                <image src="../../image/scrollbar.png"></image>
-                <view class="point" style="left:{{ left }}rpx;top:130rpx" bindtouchmove="ChangeState">
-                    <image src="../../image/scroll.png" style="width:50rpx;height:47rpx;" ></image>
-                </view>
-            </view>
-        </view>
-
-    </view>
-
-    <!--公告栏(固比)-->
-    <view class="foot">
-        <!-- 公告栏 -->
-        <view class="title">
-            <text>公告栏</text>
-        </view>
-        <view class="contentAll">
-            <view class="content">
-                <!--文本框 -->
-                <view class="main">
-                    <text>明天有大事要做</text>
-                </view>
-                <view class="date">
-                    <text>2019.01.03</text>
-                </view>
-            </view>
-            <view class="content">
-                <!--文本框 -->
-                <view class="main">
-                    <text>明天有大事要做</text>
-                </view>
-                <view class="date">
-                    <text>2019.01.03</text>
-                </view>
-            </view>
-
-        </view>
-
-
-        <view class="bottom" >
-            <button type=""  class="btn" bindtap='TopublicBill' >
-            公帐单
-            </button>
-            <button type="" class="btn">值日表</button>
         </view>
     </view>
+    <!-- 获取用户信息 -->
+    <view class="padding flex justify-center" wx:if="{{!hasUserInfo}}">
 
+        <button open-type="getUserInfo"
+        bindgetuserinfo="getUserInfo"
 
+        class="cu-btn bg-olive round lg shadow "
+        style="width:560rpx;">
+        获取头像昵称
+        </button>
+    </view>
+    <!-- 拖动状态栏 -->
+    <block wx:if="{{hasUserInfo}}">
+    <scroll-view scroll-y style="height:485rpx; overflow: auto;">
+        <view class="padding-tb-sm bg-white flex  align-center" wx:for="{{4}}" wx:key>
+            <view class="basis-xs flex justify-center ">
+                <view class=" flex flex-direction " >
+                    <image src="{{ userInfo.avatarUrl }}" class="avatar"></image>
+                </view>
+            </view>
+            <view class="basis-xl ">
+                <movable-area style="height:30rpx;width:565rpx">
+                    <movable-view  direction="none"  style="height:30rpx;width:570rpx">
+                        <image src="../../image/scrollbar.png" class="scrollBar"></image>
+                    </movable-view>
+                    <movable-view class="point"
+                    direction="horizontal"
+                    style=""
+                    x="{{changeX}}" y="-5"
+                    bindchange="bindchagehandle"
+                    bindtouchend="bindtouchendhandle"
+                    >
+                        <image src="../../image/scroll.png" style="width:47rpx;height:50rpx"></image>
+                    </movable-view>
+                </movable-area>
+            </view>
+        </view>
+    </scroll-view>
+    </block>
+</view>
+<!-- 公告 -->
+<view class="flex justify-center padding text-xxl text-olive bg-white margin-top padding-bottom-df" >公告栏</view>
+<!-- 可滑动的查看公告 -->
+<scroll-view scroll-y style="height:280rpx;overflow:auto" class="bg-white" >
+    <view class="cu-list menu-avatar">
+        <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}"
+        wx:for="{{AnnouceMent}}" wx:key
+        bindtouchstart="ListTouchStart"
+        bindtouchmove="ListTouchMove"
+        bindtouchend="ListTouchEnd"
+        data-target="move-box-{{index}}"
+        data-index="{{ index }}"
+        >
+            <view class="content flex "  >
+                <view class="flex margin-tb-lg solid-bottom padding-lr-lg align-center" >
+                    <view
+                    class="text-black text-lg text-cut"
+                    style="width:340rpx;"
+                    bindtap="showModal"
+                    data-index="{{ index }}">
+                    {{ item.content }}
+                    </view>
+                    <view class=" text-grey " style="margin-left:40rpx;width:160rpx">{{item.date}}</view>
+                </view>
+            </view>
+            <view class="move">
+
+                <view class="bg-red" bindtap="DeleteHandle">删除</view>
+            </view>
+        </view>
+    </view>
+    <view class="flex margin-left-lg padding justify-center">
+        <image
+        src="../../image/add.gif"
+        class="avatar"
+        bindtap="addAnnoucement"></image>
+    </view>
+</scroll-view>
+<!-- 公告窗口 -->
+<view class="cu-modal show" wx:if="{{ hideMod == false }}" catchtouchmove="true" >
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">{{AnnouceMent[Index].date}}</view>
+        <view class="action" bindtap="hideModal" data-target="{{ index }}">
+        <text class="cuIcon-close text-red"></text>
+        </view>
+    </view>
+    <view class="padding-xl ">
+        <textarea class="annoucement"
+        catchtouchmove="true"
+        value="{{ AnnouceMent[Index].content }}"
+        bindinput="Modalhandle"
+        style="text-align:center;margin-left:25rpx">
+        </textarea>
+    </view>
+  </view>
+</view>
+
+<!-- 按钮 -->
+<view class="padding flex justify-center bg-white" >
+    <view class="flex justify-center align-center" >
+        <view class="padding">
+            <button type="" style="width:275rpx;background-color: #6c9;" class="cu-btn bg-olive round lg shadow" bindtap="TopublicBill">公帐单</button>
+        </view>
+
+        <view class="padding">
+            <button type="" style="width:275rpx;background-color: #6c9;" class="cu-btn bg-olive round lg shadow" bindtap="TodutyRoster">值日表</button>
+        </view>
+    </view>
 </view>

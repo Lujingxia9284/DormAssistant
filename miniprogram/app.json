@@ -1,18 +1,20 @@
 {
   "pages": [
-    "pages/nonPayment/nonPayment",
     "pages/index/index",
     "pages/publicBill/publicBill",
     "pages/addBill/addBill",
-    "pages/dutyRoster/dutyRoster"
-    
+    "pages/dutyRoster/dutyRoster",
+    "pages/nonPayment/nonPayment"
+
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
-    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#66cc99",
-    "navigationBarTitleText": "云开发 QuickStart",
-    "navigationBarTextStyle": "black"
+    "navigationBarTitleText": "舍佐",
+    "navigationBarTextStyle": "white",
+    "navigationStyle":"custom"
+  },
+  "usingComponents": {
+    "cu-custom": "../colorui/components/cu-custom"
   },
   "sitemapLocation": "sitemap.json",
   "plugins": {
