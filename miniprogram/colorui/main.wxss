@@ -15,11 +15,11 @@ page {
 	--red: #e54d42;
 	--orange: #f37b1d;
 	--yellow: #fbbd08;
-	--olive: #8dc63f;
+	--olive: #6c9;
 	--green: #39b54a;
 	--cyan: #1cbbb4;
 	--blue: #0081ff;
-	--purple: #6739b6;
+	--purple: #ffffcc;
 	--mauve: #9c26b0;
 	--pink: #e03997;
 	--brown: #a5673f;
@@ -46,7 +46,7 @@ page {
 	--gradualRed: linear-gradient(45deg, #f43f3b, #ec008c);
 	--gradualOrange: linear-gradient(45deg, #ff9700, #ed1c24);
 	--gradualGreen: linear-gradient(45deg, #39b54a, #8dc63f);
-	--gradualPurple: linear-gradient(45deg, #9000ff, #5e00ff);
+	--gradualPurple: linear-gradient(45deg, #66cc99, #5e00ff);
 	--gradualPink: linear-gradient(45deg, #ec008c, #6739b6);
 	--gradualBlue: linear-gradient(45deg, #0081ff, #1cbbb4);
 	/* 阴影透明色 */
@@ -1242,14 +1242,14 @@ button.icon.lg {
 }
 
 .cu-list>.cu-item.move-cur {
-	transform: translateX(-260rpx)
+	transform: translateX(-130rpx)
 }
 
 .cu-list>.cu-item .move {
 	position: absolute;
 	right: 0;
 	display: flex;
-	width: 260rpx;
+	width: 130rpx;
 	height: 100%;
 	transform: translateX(100%)
 }
@@ -1286,8 +1286,8 @@ button.icon.lg {
 
 .cu-list.menu-avatar>.cu-item .content {
 	position: absolute;
-	left: 146rpx;
-	width: calc(100% - 96rpx - 60rpx - 120rpx - 20rpx);
+	left: 70rpx;
+	width: calc(100% - 96rpx - 40rpx );
 	line-height: 1.6em;
 }
 
@@ -1726,7 +1726,7 @@ button.icon.lg {
 	width: 100%;
 	bottom: 0;
 	z-index: 1024;
-	box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1);
+/* 	box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1); */
 }
 
 .cu-bar.tabbar {
@@ -2018,7 +2018,7 @@ button.icon.lg {
 	width: 120rpx;
 	text-align: center;
 	padding: 20rpx 0;
-	font-size: 26rpx;
+	font-size: 30rpx;
 	color: #888;
 	display: block;
 }
@@ -2050,7 +2050,7 @@ button.icon.lg {
 	font-family: "cuIcon";
 	display: block;
 	position: absolute;
-	top: 36rpx;
+	top: 53rpx;
 	z-index: 9;
 	background-color: var(--white);
 	width: 50rpx;

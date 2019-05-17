@@ -9,6 +9,7 @@ Page({
       avatarUrl:"",//用户头像
       nickName:"",//用户昵称
     },
+    time: '12:01',
   },
 
   /**
@@ -31,6 +32,12 @@ Page({
       }
     })
   },
+  TimeChange(e) {
+    this.setData({
+      time: e.detail.value
+    })
+  },
+
 
 
 })

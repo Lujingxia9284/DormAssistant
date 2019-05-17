@@ -1,3 +1,29 @@
 @import "../../colorui/main.wxss";
 @import "../../colorui/icon.wxss";
 
+.avatar{
+    height:80rpx;
+    width:80rpx;
+    border-radius:50%;
+    margin-left:7rpx;
+}
+.members{
+    margin-right:40rpx;
+    display:inline-block;
+    width:100rpx;
+    height:140rpx;
+    padding:5rpx;
+    vertical-align:middle;
+}
+.textcenter{
+    text-align:center;
+}
+.memberTag{
+    position:absolute;
+    display:inline-flex;
+    align-items:center;
+    white-space:nowrap;
+    box-sizing:border-box;
+    width:16rpx;
+    height:16rpx;
+}
