@@ -23,7 +23,7 @@
 /* 滚动视图样式 */
 
 .out {
-  background: white;
+  background: rgb(97, 49, 49);
   padding: 10rpx 30rpx;
   width: 520rpx;
   white-space: nowrap;
@@ -38,7 +38,7 @@
   /* border: 1px solid red; */
   background: white;
   display: inline-block;
-  margin-right: 18px;
+  margin-right: 36rpx;
 }
 
 /* 值日周期模态框设置 */
@@ -70,10 +70,6 @@
   padding-top: 20rpx
 }
 
-.switch{
-  
-  padding-left:430rpx;
-}
 
 /* 时间选择器布局 */
 .time{
@@ -94,17 +90,47 @@
 }
 
 
+/* 选择器样式 */
 
 .color{
-	width: 100%; 
-	height: 50px;
-	color: #e9c565;
-	font-size:22pt;
+	width: 80rpx; 
+	/* height: 2rpx; */
+	color: #6c9;
+	font-size:12px;
 	text-align: center;
-	padding: 0 10px;
-	box-sizing: border-box;
+	/* padding: 0 0px; */
+	/* box-sizing: border-box; */
 }
 picker-view-column{
-	margin: 0 3px;	
-	background: linear-gradient(to bottom,#212121, #aaaaaa,  black);
+	/* margin: 0 0px;	 */
+	background:white;
 }
+
+.avatar{
+    height:80rpx;
+    width:80rpx;
+    border-radius:50%;
+    margin-left:7rpx;
+}
+.members{
+    margin-right:40rpx;
+    display:inline-block;
+    width:100rpx;
+    height:140rpx;
+    padding:5rpx;
+    vertical-align:middle;
+}
+.textcenter{
+    text-align:center;
+}
+.memberTag{
+    position:absolute;
+    display:inline-flex;
+    align-items:center;
+    white-space:nowrap;
+    box-sizing:border-box;
+    width:16rpx;
+    height:16rpx;
+}
+
+

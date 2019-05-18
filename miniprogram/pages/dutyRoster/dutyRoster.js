@@ -22,19 +22,43 @@ Page({
     mystatus: [],
     showView:false,
     value:6,
+    showPicker:false, //值日生选择器是否出现
     
 
     // 时间选择器
-       time: '12:01',
-    arr1: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    time: '12:01',
+    arr1: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+    arr2: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
+    arr2Value: 1,
+
    
   },
+
+//值日周期复选框事件
+  radioChange: function(){
+    var that = this;
+    that.setData({
+      showPicker: (!that.data.showPicker)
+    })
+    console.log(this.data.showPicker);
+
+
+  },
+
  
-  bindChange: function (e) {
+  bind1Change: function (e) {
     const val = e.detail.value
     this.setData({
       arr1Value: this.data.arr1[val[0]],
       
+    })
+  },
+  bind2Change: function (e) {
+    const val = e.detail.value
+    this.setData({
+      arr2Value: this.data.arr2[val[0]],
+
+
     })
   },
 
