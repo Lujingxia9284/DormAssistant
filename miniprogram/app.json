@@ -1,8 +1,10 @@
 {
   "pages": [
-    "pages/index/index",
+  "pages/index/index",
     "pages/publicBill/publicBill",
-    "pages/addBill/addBill",
+   "pages/addBill/addBill",
+
+
     "pages/dutyRoster/dutyRoster",
     "pages/nonPayment/nonPayment"
 

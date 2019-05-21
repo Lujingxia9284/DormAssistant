@@ -2,18 +2,21 @@
     <view slot="backText">我的未付款</view>
 
 </cu-custom>
+
 <view class="cu-bar bg-white solid-bottom ">
     <view class="action">
       <text class="cuIcon-title text-olive"></text>
       <view class="text-lg text-shadow">累计</view>
     </view>
 </view>
+
+
 <view class=" bg-white solid-bottom" wx:for="{{6}}" wx:key>
     <view class="flex justify-center" style="height:165rpx">
         <view class="flex-sub flex justify-center align-center">
             <view class="cu-avator-lg flecu-itemx flex-direction align-center" >
                 <image src="{{ userInfo.avatarUrl }}" class="avatar"></image>
-                <view class="text-lg padding-xs margin-right-xs">{{ userInfo.nickName }}</view>
+                <view class="text-lg padding-xs margin-left-xs" style="text-align: :center;">{{ userInfo.nickName }}</view>
             </view>
         </view>
         <view class="flex-twice flex align-center margin-left-lg padding-left">
@@ -36,6 +39,8 @@
         </view>
     </radio-group>
 </view>
+
+
 <view class="cu-form-group">
     <view class="title">时间选择</view>
     <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="TimeChange">

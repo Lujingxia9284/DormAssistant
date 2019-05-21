@@ -1,8 +1,7 @@
 <cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
     <view slot="backText">添加账单</view>
-
 </cu-custom>
-<form>
+<form bindsubmit="getForm">
     <view class="cu-list grid col-4 no-border">
         <view class="cu-item" wx:for="{{parts}}" wx:key bindtap="Selcethandle"
                 data-index="{{ index }}">
@@ -16,13 +15,22 @@
         </view>
     </view>
     <view class="flex cu-form-group justify-center padding " >
-            <input placeholder="添加说明....."
+            <input
+            name="billname"
+            maxlength="10"
+            placeholder="最多输入十个字.."
             style="width:600rpx;height:56rpx;border: 1rpx solid #999;border-radius: 10rpx;">
             </input>
     </view>
     <view class="cu-form-group margin-top">
         <view class="title">日期</view>
-        <picker mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="DateChange">
+        <picker
+        name="billdate"
+        mode="date"
+        value="{{date}}"
+        start="2000-09-01"
+        end="2025-09-01"
+        bindchange="DateChange">
             <view class="picker">
                 {{date}}
             </view>
@@ -30,7 +38,12 @@
     </view>
     <view class="cu-form-group">
         <view class="title">金额</view>
-        <input placeholder="请输入..." style="text-align: center;" bindblur="BillMoney"></input>
+        <input
+        name="billsum"
+        placeholder="请输入..."
+        style="text-align: center;"
+        bindblur="BillMoney"
+        type="number"></input>
     </view>
     <view class="cu-form-group">
         <view class="title">是否平摊</view>
@@ -39,7 +52,7 @@
     <view class=" margin-top padding flex bg-white align-center" style="height:200rpx"  >
         <view class=" margin-right-xl " style="width:120rpx">成员</view>
         <scroll-view scroll-x class="justify-center" style="width:560rpx; white-space: nowrap;">
-            <view class="members" wx:for="{{ 7 }}" wx:key >
+            <view class="members" wx:for="{{ 4 }}" wx:key >
                 <image src="../../image/avt.png" class="avatar" bindtap="payNeed"></image>
                 <view class=" memberTag cuIcon-roundcheckfill {{ payDuty ? 'text-green' : '' }}"></view>
                 <input type=""
@@ -56,7 +69,7 @@
 
     <view class="cu-form-group padding flex justify-center">
         <view class="flex justify-center " >
-            <button type="" style="width:475rpx;background-color: #6c9;" class="cu-btn bg-olive round lg shadow">确认</button>
+            <button formType="submit" style="width:475rpx;background-color: #6c9;" class="cu-btn bg-olive round lg shadow">确认</button>
         </view>
     </view>
 </form>
