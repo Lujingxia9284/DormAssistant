@@ -5,8 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    date: '2018-12-25',
-   parts:[
+    date: '2019-05-08',
+    parts:[
     {part:"food",name:"外卖",click:true},
     {part:"restaurant",name:"聚餐",click:false},
     {part:"indigrent",name:"食材",click:false},
@@ -16,7 +16,7 @@ Page({
     {part:"elec",name:"电费",click:false},
     {part:"else",name:"其他",click:false},
     ],
-  partindex:'',
+    partindex:0,
     Bill:[
     {}
     ],
@@ -67,6 +67,55 @@ Page({
     this.setData({
       partindex : index
     })
+  },
+
+
+  getForm:function(e){
+    console.log(e)
+    var formdata=e.detail.value;
+    var index=this.data.partindex;
+    var parts=this.data.parts;
+    console.log(parts[index].part)
+    if(formdata.billsum==''){
+      wx.showToast({
+        title: '金额不能为空!',
+        icon: 'none',
+        duration: 1500
+      })
+      setTimeout(function () {
+        wx.hideToast()
+      }, 2000)
+    }else if(formdata.billname==''){
+      wx.showToast({
+        title: '账单名不能为空!',
+        icon: 'none',
+        duration: 1500
+      })
+      setTimeout(function () {
+        wx.hideToast()
+      }, 2000)
+    }else{
+      formdata.billdate=formdata.billdate.substring(5,formdata.billdate.length)
+      const db=wx.cloud.database();
+      db.collection("bill").add({
+        data:{
+          billname : formdata.billname,
+          billsum:formdata.billsum,
+          billdate:formdata.billdate,
+          billpart :parts[index].part,
+          equalDate : false,
+          Payfinish : false
+        }
+      }).then(res=>{
+        console.log("添加至数据库成功",res)
+        wx.navigateTo({
+        url: '../../pages/publicBill/publicBill',
+    })
+      }).catch(res=>{
+        console.log("添加失败",res)
+      })
+    }
+
   }
 
 

@@ -1,7 +1,7 @@
 @import "../../colorui/main.wxss";
 @import "../../colorui/icon.wxss";
 page{
-    height:120%;
+
     background-color: var(--white);
     color: var(--darkGray);
 }
@@ -10,11 +10,11 @@ page{
     height:150rpx;
 }
 .part{
-    width:48rpx;
+    width:64.6rpx;
     height:58rpx;
 }
 .finish{
-    margin-left:280rpx;
+
     width:121rpx;
     height:42rpx;
 }

@@ -1,15 +1,15 @@
 <cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
     <view slot="backText">公帐本</view>
-    <view slot="content">2019年4月</view>
+    <view slot="content">2019年</view>
 </cu-custom>
 <view class="flex padding-lg  grid ">
     <view class="flex justify-center padding">
         <image src="../../image/plus.png" bindtap="ToAddBill" class="plus"></image>
     </view>
-    <view class="content padding-df justify text-grey">
+    <view class="content padding-df justify text-grey" style="margin-top:5rpx">
         <view class=" text-lg padding">
             <text class="margin-right-lg">我的付款</text>
-            200
+            {{ Mypeny }}
         </view>
         <view class=" text-lg padding">
             <text class="margin-right-lg">他人付款</text>
@@ -17,23 +17,48 @@
         </view>
     </view>
 </view>
-
-<view class="cu-timeline " wx:for="{{ billpart }}" wx:key>
-    <view class="cu-time">{{ item.date }}</view>
-    <view class="cu-item text-olive ">
-        <view class="bg-white  flex align-center padding-xs solid-bottom">
-            <image src="{{ item.img }}" class="part"></image>
-            <view class="content  margin-left-xl">
-                <view class="text-lg"><text class="text-black">{{ item.name }}</text></view>
-                <view class="text-price text-black">{{ item.money }}</view>
+<scroll-view scroll-y style="width:100%;height:820rpx">
+    <view class="cu-timeline " wx:for="{{ billpart }}" wx:key >
+        <view class="cu-time" wx:if="{{ !item.equalDate }}">{{ item.billdate }}</view>
+        <view class="cu-item text-olive ">
+            <view class="bg-white  flex align-center padding-xs solid-bottom">
+                <image src="../../image/{{ item.billpart }}active.png" class="part"></image>
+                <view class="margin-left-xl" style="width:360rpx;height:72rpx">
+                    <view class="text-lg text-black">{{ item.billname }}</view>
+                    <view class="text-price text-black">{{ item.billsum }}</view>
+                </view>
+                <image src="../../image/{{ item.Payfinish? '' : 'un'}}finished.png"
+                class="finish"
+                bindtap="showModal"
+                data-index="{{ index }}"
+                >
+                </image>
             </view>
-            <image src="../../image/{{ Payfinish? '' : 'un'}}finished.png"
-            class="finish"
-            bindtap="changeFinish">
-            </image>
+        </view>
+    </view>
+
+</scroll-view>
+
+
+<view class="cu-modal show" wx:if="{{ hideMod == false }}"  >
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">确认窗口</view>
+            <view class="action" bindtap="hideModal" data-target="{{ index }}">
+            <text class="cuIcon-close text-red"></text>
+            </view>
+        </view>
+        <view class="padding-xl ">
+            <view class="text-black" style="text-align:center">确定要取消这笔收款吗？取消后无法复原。</view>
+        </view>
+        <view class="cu-bar bg-white justify-center">
+            <view class="action">
+            <button class="cu-btn bg-green margin-left" bindtap="changeFinish">确定</button>
+            </view>
         </view>
     </view>
 </view>
+
 <view class="cu-bar foot bg-white justify-center">
     <view class="flex justify-center " >
         <button type="" style="width:475rpx;background-color: #6c9;" class="cu-btn bg-olive round lg shadow" bindtap="TononPayment">我的未付款
