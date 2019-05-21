@@ -27,7 +27,7 @@
     <!-- 拖动状态栏 -->
     <block wx:if="{{hasUserInfo}}">
     <scroll-view scroll-y style="height:485rpx; overflow: auto;">
-        <view class="padding-tb-sm bg-white flex  align-center" wx:for="{{4}}" wx:key>
+        <view class="padding-tb-sm bg-white flex  align-center" wx:for="{{5}}" wx:key>
             <view class="basis-xs flex justify-center ">
                 <view class=" flex flex-direction " >
                     <image src="{{ userInfo.avatarUrl }}" class="avatar"></image>
@@ -110,6 +110,10 @@
     </view>
   </view>
 </view>
+
+<view>{{aaa}}</view>
+<view>{{userInfo.avatarUrl}}</view>
+
 
 <!-- 按钮 -->
 <view class="padding flex justify-center bg-white" >

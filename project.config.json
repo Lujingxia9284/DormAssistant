@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": 6,
 			"list": [
 				{
 					"id": -1,
@@ -70,7 +70,16 @@
 					"id": -1,
 					"name": "index",
 					"pathName": "pages/index/index",
+					"query": "",
 					"scene": null
+				},
+				{
+					"id": 6,
+					"name": "1036",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": 1036,
+					"referrerInfo": {}
 				}
 			]
 		}
