@@ -13,7 +13,11 @@
     "navigationBarBackgroundColor": "#66cc99",
     "navigationBarTitleText": "舍佐",
     "navigationBarTextStyle": "white",
-    "navigationStyle":"custom"
+    "navigationStyle":"custom",
+    "enablePullDownRefresh": true ,
+    "backgroundTextStyle": "dark" 
+
+    
   },
   "usingComponents": {
     "cu-custom": "../colorui/components/cu-custom"

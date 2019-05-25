@@ -1,10 +1,14 @@
 // miniprogram/pages/addBill/addBill.js
+const app = getApp()
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    imageUrl: app.globalData.imageUrl,
     date: '2019-05-08',
     parts:[
     {part:"food",name:"外卖",click:true},
@@ -116,6 +120,16 @@ Page({
       })
     }
 
+
+   
+
+
+
+  },
+  onLoad:function(options){
+   
+    this.setData({ imageUrl:app.globalData.imageUrl})
+    console.log(this.data.imageUrl)
   }
 
 

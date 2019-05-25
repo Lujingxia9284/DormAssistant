@@ -52,8 +52,8 @@
     <view class=" margin-top padding flex bg-white align-center" style="height:200rpx"  >
         <view class=" margin-right-xl " style="width:120rpx">成员</view>
         <scroll-view scroll-x class="justify-center" style="width:560rpx; white-space: nowrap;">
-            <view class="members" wx:for="{{ 4 }}" wx:key >
-                <image src="../../image/avt.png" class="avatar" bindtap="payNeed"></image>
+            <view class="members" wx:for="{{imageUrl}}" wx:for-item="i" wx:key >
+                <image src="i" class="avatar" bindtap="payNeed"></image>
                 <view class=" memberTag cuIcon-roundcheckfill {{ payDuty ? 'text-green' : '' }}"></view>
                 <input type=""
                 name=""

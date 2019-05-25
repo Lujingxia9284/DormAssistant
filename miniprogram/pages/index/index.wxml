@@ -27,10 +27,10 @@
     <!-- 拖动状态栏 -->
     <block wx:if="{{hasUserInfo}}">
     <scroll-view scroll-y style="height:485rpx; overflow: auto;">
-        <view class="padding-tb-sm bg-white flex  align-center" wx:for="{{5}}" wx:key>
+        <view class="padding-tb-sm bg-white flex  align-center" wx:for="{{imageUrl}}" wx:for-item="i" wx:key>
             <view class="basis-xs flex justify-center ">
                 <view class=" flex flex-direction " >
-                    <image src="{{ userInfo.avatarUrl }}" class="avatar"></image>
+                    <image src="{{i}}" class="avatar"></image>
                 </view>
             </view>
             <view class="basis-xl ">
@@ -54,6 +54,8 @@
     </block>
 </view>
 <!-- 公告 -->
+
+
 <view class="flex justify-center padding text-xxl text-olive bg-white margin-top padding-bottom-df" >公告栏</view>
 <!-- 可滑动的查看公告 -->
 <scroll-view scroll-y style="height:280rpx;overflow:auto" class="bg-white" >
@@ -111,7 +113,7 @@
   </view>
 </view>
 
-<view>{{aaa}}</view>
+<view>{{shareUrl}}</view>
 <view>{{userInfo.avatarUrl}}</view>
 
 
