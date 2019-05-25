@@ -39,6 +39,7 @@
     <view class="cu-form-group">
         <view class="title">金额</view>
         <input
+        value="{{ billmoney }}"
         name="billsum"
         placeholder="请输入..."
         style="text-align: center;"
@@ -50,17 +51,27 @@
         <switch checked bindtap="flatHandle"></switch>
     </view>
     <view class=" margin-top padding flex bg-white align-center" style="height:200rpx"  >
-        <view class=" margin-right-xl " style="width:120rpx">成员</view>
+         <view class=" margin-right-xl " style="width:120rpx">成员</view>
         <scroll-view scroll-x class="justify-center" style="width:560rpx; white-space: nowrap;">
-            <view class="members" wx:for="{{ 4 }}" wx:key >
-                <image src="../../image/avt.png" class="avatar" bindtap="payNeed"></image>
-                <view class=" memberTag cuIcon-roundcheckfill {{ payDuty ? 'text-green' : '' }}"></view>
-                <input type=""
-                name=""
-                placeholder="{{ flat ?  billmoney/4 : '请输入' }}"
-                bindblur="PersonalCost"
-                style="text-align:center;"
-                />
+            <view class="members" wx:for="{{ nonPay }}" wx:key >
+                <image src="../../image/avt.png"
+                class="avatar"
+                bindtap="payNeed"
+                data-index="{{ index }}"
+                ></image>
+                <view class="memberTag cuIcon-roundcheckfill {{ item.payDuty ? 'text-green' : '' }}"></view>
+                <block wx:if="{{ item.payDuty }}">
+                    <input type=""
+                    name="input{{index}}"
+                    data-index="{{ index }}"
+                    value="{{ flat?  billmoney/paynum : '' }}"
+                    placeholder="{{ flat ?  0 : '请输入' }}"
+                    bindblur="PersonalCost"
+                    style="text-align:center;"
+                    />
+
+                </block>
+
             </view>
 
         </scroll-view>

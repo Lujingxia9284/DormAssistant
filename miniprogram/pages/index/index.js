@@ -18,9 +18,7 @@ Page({
       { path: '../../image/outdoor.png', name: '外出', width: 64, height: 62 }
     ],
     left: 180,
-    Users: [
-      {}, {}
-    ],
+
     userInfo: {
       avatarUrl: "",//用户头像
       nickName: "",//用户昵称
@@ -54,25 +52,10 @@ Page({
     var left = this.left;
     var clientX = e.touches[0].clientX;
 
-    // Users:[
-    // {},{}
-    // ],
-
-    // ----获取用户-----
-   
-
-
-    // ----------------
-
-
     left = e.touches[0].clientX;
     this.setData({ left: left });
 
   },
-  TopublicBill: function () {
-
-  },
-  
   addAnnoucement:function(){
     var AnnouceMent=this.data.AnnouceMent
     var DATE=util.formatDate(new Date())
@@ -119,6 +102,7 @@ Page({
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
+
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true

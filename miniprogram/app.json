@@ -1,12 +1,12 @@
 {
   "pages": [
+  "pages/addBill/addBill",
+  "pages/nonPayment/nonPayment",
   "pages/index/index",
-    "pages/publicBill/publicBill",
-   "pages/addBill/addBill",
+   "pages/publicBill/publicBill",
 
+    "pages/dutyRoster/dutyRoster"
 
-    "pages/dutyRoster/dutyRoster",
-    "pages/nonPayment/nonPayment"
 
   ],
   "window": {

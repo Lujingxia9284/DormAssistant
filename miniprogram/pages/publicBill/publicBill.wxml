@@ -27,12 +27,21 @@
                     <view class="text-lg text-black">{{ item.billname }}</view>
                     <view class="text-price text-black">{{ item.billsum }}</view>
                 </view>
-                <image src="../../image/{{ item.Payfinish? '' : 'un'}}finished.png"
-                class="finish"
-                bindtap="showModal"
-                data-index="{{ index }}"
-                >
-                </image>
+                <block wx:if="{{item._openid!='oPoCf4ufDIPpNFZaCOnJTNDMDjgY'}}">
+                    <image src="../../image/{{ item.Payfinish? '' : 'un'}}finished.png"
+                    class="finish"
+                    bindtap="showModal"
+                    data-index="{{ index }}"
+                    >
+                    </image>
+                </block>
+                <block wx:if="{{ item._openid=='oPoCf4ufDIPpNFZaCOnJTNDMDjgY' }}">
+
+                    <image src="{{ userInfo.avatarUrl }}"
+                    class="avatar"
+                    >
+                    </image>
+                </block>
             </view>
         </view>
     </view>

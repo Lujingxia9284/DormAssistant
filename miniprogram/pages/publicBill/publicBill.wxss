@@ -18,3 +18,10 @@ page{
     width:121rpx;
     height:42rpx;
 }
+.avatar{
+    height:80rpx;
+    width:80rpx;
+    margin-bottom:10rpx;
+    margin-left:15rpx;
+    border-radius:50%;
+}

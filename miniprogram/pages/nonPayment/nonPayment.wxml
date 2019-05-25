@@ -13,10 +13,10 @@
 
 <view class=" bg-white solid-bottom" wx:for="{{6}}" wx:key>
     <view class="flex justify-center" style="height:165rpx">
-        <view class="flex-sub flex justify-center align-center">
-            <view class="cu-avator-lg flecu-itemx flex-direction align-center" >
-                <image src="{{ userInfo.avatarUrl }}" class="avatar"></image>
-                <view class="text-lg padding-xs margin-left-xs" style="text-align: :center;">{{ userInfo.nickName }}</view>
+        <view class="flex-sub flex justify-center align-center" >
+            <view class="flex-direction justify-center" style="text-align:center;" >
+                <image src="{{ userInfo.avatarUrl }}" class="avatar" style="vertical-align: center;margin-right:10rpx"></image>
+                <view class="text-lg padding-xs margin-right-xs text-cut" style="text-align :center;width:200rpx;">{{ userInfo.nickName }}</view>
             </view>
         </view>
         <view class="flex-twice flex align-center margin-left-lg padding-left">

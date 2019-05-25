@@ -1,5 +1,5 @@
 // miniprogram/pages/publicBill/publicBill.js
-var app=getApp();
+const app=getApp();
 
 Page({
 
@@ -7,16 +7,25 @@ Page({
    * 页面的初始数据
    */
   data: {
+
     Mypeny:'',
     billpart:[],//从全局变量获取账单
     billIndex:'',
     hideMod:true,
-
+    openid:app.globalData._openid,
+    userInfo:{},
 
   },
-  onShow(options) {
+  onShow:function(options) {
+
+    this.setData({
+      userInfo: app.globalData.userInfo,
+    })
+    console.log(this.data.userInfo)
     const db=wx.cloud.database();
-    db.collection('bill').get().then(res=>{
+
+    db.collection('bill').orderBy('billdate','asc')
+    .get().then(res=>{
       console.log(res.data)
       this.setData({
         billpart:res.data
@@ -24,17 +33,17 @@ Page({
       console.log(this.data.billpart)
 
       var array=this.data.billpart;
-      var s='';
-      //按日期对账单进行排序
-      for(var i=1;i<array.length;i++){
-        for(var j=i;j>0;j--){
-          if(array[j].billdate<array[j-1].billdate){
-            s=array[j-1];
-            array[j-1]=array[j];
-            array[j]=s;
-          }
-        }
-      }
+      // var s='';
+      // //按日期对账单进行排序
+      // for(var i=1;i<array.length;i++){
+      //   for(var j=i;j>0;j--){
+      //     if(array[j].billdate<array[j-1].billdate){
+      //       s=array[j-1];
+      //       array[j-1]=array[j];
+      //       array[j]=s;
+      //     }
+      //   }
+      // }
       //相同日期的在同一时间线里
       for(var i=1;i<array.length;i++){
         if(array[i].billdate==array[i-1].billdate){
@@ -50,7 +59,8 @@ Page({
     //实现我的付款和他人付款的更新
     db.collection('bill').where({
       _openid: 'oPoCf4ufDIPpNFZaCOnJTNDMDjgY',
-      billpart:'elec'
+
+
       })
         .get().then(res=>{
       // res.data 是包含以上定义的两条记录的数组
@@ -63,8 +73,7 @@ Page({
             this.setData({
               Mypeny : sum
             })
-            console.log(sum)
-
+            console.log(res.data)
         })
 
   },
