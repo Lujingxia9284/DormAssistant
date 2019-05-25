@@ -10,7 +10,7 @@
 	},
 	"appid": "wx0da968f13d0d1495",
 	"projectname": "DormAssistant",
-	"libVersion": "2.2.5",
+	"libVersion": "2.7.0",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",

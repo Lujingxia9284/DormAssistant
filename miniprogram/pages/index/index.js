@@ -1,14 +1,13 @@
-
 const app = getApp()
-var util=require('../../util/util.js')
+var util = require('../../util/util.js')
 var userId
 var userDormid    //变量存储数据库记录id和相应的dormid和分享过来的shareDormid
-var shareDormid = userDormid 
+var shareDormid = userDormid
 var share          //判断是否别人转发过来的
 wx.cloud.init()
 const db = wx.cloud.database()
 var imageUrl = []    //存储相同dormid的imageUrl
-var userOpenid=[]  //存储相同dormid的openid
+var userOpenid = []  //存储相同dormid的openid
 var openid   //获取当前用户的openid
 var usere    //储存获取用户信息点击按钮返回值e
 
@@ -18,8 +17,8 @@ var usere    //储存获取用户信息点击按钮返回值e
 
 Page({
   data: {
-    shareDormid:"hhhhhhhhhhhhhhh",
-    refreshStatus:false,//是否下拉刷新
+    shareDormid: "hhhhhhhhhhhhhhh",
+    refreshStatus: false,//是否下拉刷新
     state: [
       { path: '../../image/bed.png', name: '睡觉', width: 59, height: 62 },
       { path: '../../image/study.png', name: '学习', width: 45, height: 62 },
@@ -29,7 +28,7 @@ Page({
     left: 180,
     Users: [{}, {}],
     hasUserInfo: false,
-   
+
     // ----实现状态滑动---
     changeX: app.globalData.changeX,
     lastchangeX: 0,
@@ -40,7 +39,7 @@ Page({
       { path: '../../image/fun.png', name: '娱乐', width: 64, height: 62 },
       { path: '../../image/outdoor.png', name: '外出', width: 64, height: 62 }
     ],
-  
+
 
     // ----公告栏和模态框-----
     hideMod: true,
@@ -66,10 +65,10 @@ Page({
     var left = this.left;
     var clientX = e.touches[0].clientX;
 
-    
+
 
     // ----获取用户-----
-   
+
 
 
     // ----------------
@@ -80,25 +79,25 @@ Page({
 
   },
 
-  
-  addAnnoucement:function(){
-    var AnnouceMent=this.data.AnnouceMent
-    var DATE=util.formatDate(new Date())
+
+  addAnnoucement: function () {
+    var AnnouceMent = this.data.AnnouceMent
+    var DATE = util.formatDate(new Date())
     console.log(DATE)
     AnnouceMent.push({
-      content:'',
-      date:DATE
+      content: '',
+      date: DATE
     })
     this.setData({
-      AnnouceMent : AnnouceMent,
-      hideMod:false,
-      Index:AnnouceMent.length-1
+      AnnouceMent: AnnouceMent,
+      hideMod: false,
+      Index: AnnouceMent.length - 1
     })
 
   },
 
-//------------------页面路由-----------------------
-  TopublicBill:function(){
+  //------------------页面路由-----------------------
+  TopublicBill: function () {
     wx.navigateTo({
       url: '../../pages/publicBill/publicBill',
     })
@@ -142,7 +141,7 @@ Page({
       changeX: lastchangeX
     })
   },
- 
+
 
   // -----------------模态框----------------
   showModal: function (e) {
@@ -192,7 +191,7 @@ Page({
       this.setData({
         modalName: e.currentTarget.dataset.target
       })
-    } else { 
+    } else {
       this.setData({
         modalName: null
       })
@@ -217,28 +216,27 @@ Page({
     return {
       title: '舍佐',
       path: '/pages/index/index?userDormid=' + userDormid,
-     
-     }
-     
+
+    }
+
   },
 
 
-// 登陆
+  // 登陆
 
-//-----------------------onLoad------------------
+  //-----------------------onLoad------------------
   onLoad: function (options) {
     wx.stopPullDownRefresh()
     var that = this
-    
-  
-    
-    console.log('userDormid'+userDormid)
-    var that=this;
+
+
+
+    console.log('userDormid' + userDormid)
+    var that = this;
     //-----处理转发分享的参数-------
-    if(options.userDormid)
-    {
-      share=true
-      shareDormid=options.userDormid
+    if (options.userDormid) {
+      share = true
+      shareDormid = options.userDormid
     };
 
     //========控制显示
@@ -257,9 +255,9 @@ Page({
     //       success: res => {
     //         console.log("hhhhhhhhhhhhhhhhh:" + res.data)
     //         if (res.data != "") {
-              
+
     //           that.setData({
-          
+
     //            hasUserInfo: true
     //           })
     //           console.log("hasUserInfo:"+that.data.hasUserInfo)
@@ -269,17 +267,17 @@ Page({
     //         }
     //         })
 
-   
-
-   
-   
-
-    
 
 
 
 
-  
+
+
+
+
+
+
+
 
 
     wx.showShareMenu({
@@ -287,7 +285,7 @@ Page({
     });
 
 
-//-----用户数据设全局--------------------------------------------------------------
+    //-----用户数据设全局--------------------------------------------------------------
     // if (app.globalData.userInfo) {
     //   that.setData({
     //     // userInfo: app.globalData.userInfo,
@@ -301,7 +299,7 @@ Page({
     //       // userInfo: res.userInfo,
     //       hasUserInfo: true
     //     })
-        
+
     //   }
     // } else {
     //   // 在没有 open-type=getUserInfo 版本的兼容处理
@@ -319,24 +317,24 @@ Page({
 
   },
 
-  onShow: function (){
-   
-   
+  onShow: function () {
+
+
   },
 
 
   //--------------下拉刷新监听函数
   onPullDownRefresh: function () {
-    
-    this.setData({refreshStatus:true})
+
+    this.setData({ refreshStatus: true })
     this.getUserInfo(usere); //
   },
 
 
   //---------------获取用户信息按钮的绑定事件-------------------------------
-  getUserInfo: function(e) {
-    var that=this
-    usere= e 
+  getUserInfo: function (e) {
+    var that = this
+    usere = e
     console.log('用户信息:' + e.detail.userInfo)
 
     // ============重构==============
@@ -353,11 +351,11 @@ Page({
 
         }).get({
           //数据库中已有当前用户数据
-          success: res=>{
-            console.log("hhh:"+res.data)
-            if(res.data==""){
-             console.log("数据库中没有当前用户数据")
-              
+          success: res => {
+            console.log("hhh:" + res.data)
+            if (res.data == "") {
+              console.log("数据库中没有当前用户数据")
+
               db.collection('userInfo').add({
                 data: {
 
@@ -375,7 +373,7 @@ Page({
                     }
                   }).then(
                     res => {
-                      console.log("添加记录的dormid为:"+shareDormid)
+                      console.log("添加记录的dormid为:" + shareDormid)
                       // db.collection('userInfo').doc(userId).get().then(res => {
                       //   console.log(res.data.dormid)
                       userDormid = shareDormid
@@ -413,18 +411,18 @@ Page({
               })
 
             }
-            else{
-            console.log("数据库中已有当前用户数据")
-            console.log("当前用户的dormid：" + res.data[0].dormid)
-            userDormid = res.data[0].dormid
-            //获取有相同dormid的用户数据
-            
+            else {
+              console.log("数据库中已有当前用户数据")
+              console.log("当前用户的dormid：" + res.data[0].dormid)
+              userDormid = res.data[0].dormid
+              //获取有相同dormid的用户数据
+
             }
           },
 
 
-          
-          complete:res=>{
+
+          complete: res => {
             db.collection('userInfo').where({
 
               dormid: userDormid
@@ -448,17 +446,19 @@ Page({
 
 
         })
-          
+
 
         that.setData({
           hasUserInfo: true
         })
 
       },
-    
-
- 
 
 
 
-    })}})
+
+
+
+    })
+  }
+})
