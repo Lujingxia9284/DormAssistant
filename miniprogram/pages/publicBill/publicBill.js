@@ -1,5 +1,7 @@
 // miniprogram/pages/publicBill/publicBill.js
+wx.cloud.init()
 const app=getApp();
+const db=wx.cloud.database();
 
 Page({
 
@@ -7,24 +9,36 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    Myopenid:'',
+    openid:[],
+    imageUrl:[],//从全局获取自己的信息
+    billpart:[],//从数据库获取账单
     Mypeny:'',
-    billpart:[],//从全局变量获取账单
+    Otherpeny:'',
     billIndex:'',
     hideMod:true,
-    openid:app.globalData._openid,
-    userInfo:{},
+    dormid:''
+
+
 
   },
+  onLoad:function(options){
+    this.setData({
+      openid :app.globalData.userOpenid,
+      imageUrl: app.globalData.imageUrl,
+      Myopenid : app.globalData.Myopenid,
+      dormid : app.globalData.dormid
+    })
+    console.log(this.data.dormid)
+  },
+
   onShow:function(options) {
 
-    this.setData({
-      userInfo: app.globalData.userInfo,
+    // 以升序取出数据库中的账单
+    db.collection('bill').where({
+      dormid : this.data.dormid
     })
-    console.log(this.data.userInfo)
-    const db=wx.cloud.database();
-
-    db.collection('bill').orderBy('billdate','asc')
+    .orderBy('billdate','asc')
     .get().then(res=>{
       console.log(res.data)
       this.setData({
@@ -33,17 +47,6 @@ Page({
       console.log(this.data.billpart)
 
       var array=this.data.billpart;
-      // var s='';
-      // //按日期对账单进行排序
-      // for(var i=1;i<array.length;i++){
-      //   for(var j=i;j>0;j--){
-      //     if(array[j].billdate<array[j-1].billdate){
-      //       s=array[j-1];
-      //       array[j-1]=array[j];
-      //       array[j]=s;
-      //     }
-      //   }
-      // }
       //相同日期的在同一时间线里
       for(var i=1;i<array.length;i++){
         if(array[i].billdate==array[i-1].billdate){
@@ -58,20 +61,25 @@ Page({
 
     //实现我的付款和他人付款的更新
     db.collection('bill').where({
-      _openid: 'oPoCf4ufDIPpNFZaCOnJTNDMDjgY',
-
-
+      dormid :this.data.dormid
       })
         .get().then(res=>{
       // res.data 是包含以上定义的两条记录的数组
 
             var array=res.data
-            var sum=0
+            var Mysum=0
+            var Othersum=0
             for(var i=0;i<array.length;i++){
-              sum+=Number(array[i].billsum)
+              if(array[i]._openid==this.data.Myopenid){
+                Mysum+=Number(array[i].billsum)
+              }else{
+                Othersum+=Number(array[i].billsum)
+              }
+
             }
             this.setData({
-              Mypeny : sum
+              Mypeny : Mysum,
+              Otherpeny : Othersum
             })
             console.log(res.data)
         })
@@ -91,9 +99,26 @@ Page({
     console.log('点击后收款结束')
     var param={}
     var billpart=this.data.billpart
-    var string = "billpart["+this.data.billIndex+"].Payfinish";
+    var index=this.data.billIndex
+    var string = "billpart["+index+"].Payfinish";
     param[string]=true
     this.setData(param)
+    // console.log(billpart[index])
+    console.log(billpart[index]._id)
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'payFinish',
+      // 传给云函数的参数
+      data: {
+        ID : billpart[index]._id
+      },
+      complete: res => {
+        console.log(res)
+      }
+    })
+
+
+
 
     this.setData({
       hideMod:true

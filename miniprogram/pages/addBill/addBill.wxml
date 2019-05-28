@@ -54,14 +54,14 @@
          <view class=" margin-right-xl " style="width:120rpx">成员</view>
         <scroll-view scroll-x class="justify-center" style="width:560rpx; white-space: nowrap;">
             <view class="members" wx:for="{{ nonPay }}" wx:key >
-                <image src="../../image/avt.png"
+                <image src="{{ item.avtUrl }}"
                 class="avatar"
                 bindtap="payNeed"
                 data-index="{{ index }}"
                 ></image>
                 <view class="memberTag cuIcon-roundcheckfill {{ item.payDuty ? 'text-green' : '' }}"></view>
                 <block wx:if="{{ item.payDuty }}">
-                    <input type=""
+                    <input ty   pe=""
                     name="input{{index}}"
                     data-index="{{ index }}"
                     value="{{ flat?  billmoney/paynum : '' }}"

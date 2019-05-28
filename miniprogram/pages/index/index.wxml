@@ -50,6 +50,10 @@
                 </movable-area>
             </view>
         </view>
+        <view class="flex  padding justify-center" style="padding-left:120rpx;">
+            <button open-type='share' class="share" ></button>
+            <image src="../../image/add.gif" class="addshare"></image>
+        </view>
     </scroll-view>
     </block>
 </view>
@@ -58,21 +62,21 @@
 
 <view class="flex justify-center padding text-xxl text-olive bg-white margin-top padding-bottom-df" >公告栏</view>
 <!-- 可滑动的查看公告 -->
-<scroll-view scroll-y style="height:280rpx;overflow:auto" class="bg-white" >
-    <view class="cu-list menu-avatar">
+<scroll-view scroll-y style="height:280rpx;overflow:auto" class="bg-white" catchtouchmove="true">
+    <view class="cu-list menu-avatar" >
         <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}"
         wx:for="{{AnnouceMent}}" wx:key
         bindtouchstart="ListTouchStart"
         bindtouchmove="ListTouchMove"
         bindtouchend="ListTouchEnd"
         data-target="move-box-{{index}}"
-        data-index="{{ index }}"
+
         >
             <view class="content flex "  >
                 <view class="flex margin-tb-lg solid-bottom padding-lr-lg align-center" >
                     <view
                     class="text-black text-lg text-cut"
-                    style="width:340rpx;"
+                    style="width:340rpx;height:44.8rpx"
                     bindtap="showModal"
                     data-index="{{ index }}">
                     {{ item.content }}
@@ -82,7 +86,7 @@
             </view>
             <view class="move">
 
-                <view class="bg-red" bindtap="DeleteHandle">删除</view>
+                <view class="bg-red" bindtap="DeleteHandle" data-index="{{ index }}">删除</view>
             </view>
         </view>
     </view>
@@ -90,11 +94,12 @@
         <image
         src="../../image/add.gif"
         class="avatar"
-        bindtap="addAnnoucement"></image>
+        bindtap="addAnnoucement"
+        style="margin-right:30rpx"></image>
     </view>
 </scroll-view>
 <!-- 公告窗口 -->
-<view class="cu-modal show" wx:if="{{ hideMod == false }}" catchtouchmove="true" >
+<view class="cu-modal show" wx:if="{{ hideMod == false }}"  >
     <view class="cu-dialog">
         <view class="cu-bar bg-white justify-end">
             <view class="content">{{AnnouceMent[Index].date}}</view>
@@ -104,9 +109,12 @@
     </view>
     <view class="padding-xl ">
         <textarea class="annoucement"
-        catchtouchmove="true"
+        catchtouchmove="{{true}}"
+        fixed="true"
+
         value="{{ AnnouceMent[Index].content }}"
         bindinput="Modalhandle"
+        bindblur="changeAnnoucement"
         style="text-align:center;margin-left:25rpx">
         </textarea>
     </view>

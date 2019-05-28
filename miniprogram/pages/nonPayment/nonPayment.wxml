@@ -10,20 +10,45 @@
     </view>
 </view>
 
-
-<view class=" bg-white solid-bottom" wx:for="{{6}}" wx:key>
-    <view class="flex justify-center" style="height:165rpx">
-        <view class="flex-sub flex justify-center align-center" >
-            <view class="flex-direction justify-center" style="text-align:center;" >
-                <image src="{{ userInfo.avatarUrl }}" class="avatar" style="vertical-align: center;margin-right:10rpx"></image>
-                <view class="text-lg padding-xs margin-right-xs text-cut" style="text-align :center;width:200rpx;">{{ userInfo.nickName }}</view>
+<view wx:for="{{ nonPayment }}" wx:key>
+    <view class=" bg-white solid-bottom" >
+        <view class="flex justify-center" style="height:165rpx">
+            <view class="flex-sub flex justify-center align-center" >
+                <view class="flex-direction justify-center" style="text-align:center;" >
+                    <image src="{{ item.avtUrl }}" class="avatar" style="vertical-align: center;margin-right:10rpx"></image>
+                    <view class="text-lg padding-xs margin-right-xs text-cut" style="text-align :center;width:200rpx;">{{ userInfo.nickName }}</view>
+                </view>
+            </view>
+            <view class="flex-twice flex align-center margin-left-lg padding-left">
+                <view class="text-price text-xl">{{ item.amount }}</view>
+            </view>
+            <view class="flex-sub flex justify-center align-center"
+            bindtap="showDetail"
+            data-index="{{ index }}">
+                <text class="cuIcon-{{item.showDetails? '' : 'un'}}fold lg text-grey" ></text>
             </view>
         </view>
-        <view class="flex-twice flex align-center margin-left-lg padding-left">
-            <view class="text-price text-xl">100</view>
+    </view>
+    <block wx:if="{{ item.showDetails }}">
+    <view class="bg-white solid-bottom padding-lg flex" wx:for="{{ item.bills }}" wx:key  style="height:165rpx">
+        <view class="flex-sub flex align-center justify-center" >
+            <image src="../../image/{{ item.billpart }}active.png" class="part"></image>
+        </view>
+        <view
+        class=" flex-direction flex justify-center margin-left-xs"
+        style="width:360rpx;margin-left:20rpx">
+            <view class="text-lg text-black">{{ item.billname }}</view>
+            <view class="text-price text-black">{{ item.billsum }}</view>
+        </view>
+        <view class="flex-sub  align-center flex justify-center">
+            {{ item.billdate }}
         </view>
     </view>
+    </block>
+
+
 </view>
+
 
 
 <view class="cu-item bg-white solid-bottom margin-top"  >
@@ -32,7 +57,7 @@
             <view class="title">提醒周期</view>
             <view class="flex align-center margin-left-df">
                 <radio class="green "></radio>
-                <view class="margin-left-lg text-olive">一周一清</view>
+                <view class="margin-left-lg text-olive">一月一清</view>
                 <radio class="green margin-left-sm"></radio>
                 <view class="margin-left-lg text-olive">一周一清</view>
             </view>
