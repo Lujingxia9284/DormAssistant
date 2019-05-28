@@ -1,6 +1,27 @@
 @import "../../colorui/main.wxss";
 @import "../../colorui/icon.wxss";
 
+
+.share{
+    height:80rpx;
+    width:80rpx;
+    background-color:yellow;
+    z-index:1;
+    opacity:0;
+}
+.share::after{
+    border : 0;
+}
+.addshare{
+    height:80rpx;
+    width:80rpx;
+    border-radius:50%;
+    position:relative;
+    right:268rpx;
+    z-index:0;
+}
+
+
 .statepart{
     flex:1;
     padding:0 10rpx;

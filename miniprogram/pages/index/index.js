@@ -8,6 +8,7 @@ wx.cloud.init()
 const db = wx.cloud.database()
 var imageUrl = []    //存储相同dormid的imageUrl
 var userOpenid = []  //存储相同dormid的openid
+var nickName = []    //存储相同doemid的nickName
 var openid   //获取当前用户的openid
 var usere    //储存获取用户信息点击按钮返回值e
 
@@ -19,12 +20,7 @@ Page({
   data: {
     shareDormid: "hhhhhhhhhhhhhhh",
     refreshStatus: false,//是否下拉刷新
-    state: [
-      { path: '../../image/bed.png', name: '睡觉', width: 59, height: 62 },
-      { path: '../../image/study.png', name: '学习', width: 45, height: 62 },
-      { path: '../../image/fun.png', name: '娱乐', width: 64, height: 62 },
-      { path: '../../image/outdoor.png', name: '外出', width: 64, height: 62 }
-    ],
+  
     left: 180,
     Users: [{}, {}],
     hasUserInfo: false,
@@ -43,11 +39,7 @@ Page({
 
     // ----公告栏和模态框-----
     hideMod: true,
-    AnnouceMent: [
-      { content: "明天有大事要做", date: '2019.01.03' },
-      { content: "明天有大事要做", date: '2019.05.03' },
-      // {content:"明天有大事要做",date:'2019.06.03'},
-    ],
+    AnnouceMent: [],
     Index: '',
   },
 
@@ -61,37 +53,39 @@ Page({
 
 
 
-  ChangeState: function (e) {
-    var left = this.left;
-    var clientX = e.touches[0].clientX;
+  // ChangeState: function (e) {
+  //   var left = this.left;
+  //   var clientX = e.touches[0].clientX;
+  //   left = e.touches[0].clientX;
+  //   this.setData({ left: left });
 
-
-
-    // ----获取用户-----
-
-
-
-    // ----------------
-
-
-    left = e.touches[0].clientX;
-    this.setData({ left: left });
-
-  },
+  // },
 
 
   addAnnoucement: function () {
     var AnnouceMent = this.data.AnnouceMent
     var DATE = util.formatDate(new Date())
-    console.log(DATE)
-    AnnouceMent.push({
-      content: '',
-      date: DATE
-    })
-    this.setData({
-      AnnouceMent: AnnouceMent,
-      hideMod: false,
-      Index: AnnouceMent.length - 1
+    console.log(app.globalData.dormid)
+
+
+    db.collection('Annoucement').add({
+      data: {
+        content: '',
+        date: DATE,
+        dormid: app.globalData.dormid
+      }
+    }).then(res => {
+      console.log(res)
+      AnnouceMent.push({
+        content: '',
+        date: DATE,
+        _id: res._id,
+      })
+      this.setData({
+        AnnouceMent: AnnouceMent,
+        hideMod: false,
+        Index: AnnouceMent.length - 1
+      })
     })
 
   },
@@ -143,6 +137,36 @@ Page({
   },
 
 
+
+  changeAnnoucement: function (e) {
+    console.log(e.detail.value)
+    var index = this.data.Index
+    var AnnouceMent = this.data.AnnouceMent
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'annoucementUpdate',
+      // 传给云函数的参数
+      data: {
+        ID: AnnouceMent[index]._id,
+        content: e.detail.value
+      },
+      complete: res => {
+        console.log(res)
+      }
+    })
+    // db.collection('Annoucement').where({
+    //   _id : AnnouceMent[index]._id
+    // }).update({
+
+    // })
+
+  },
+
+
+
+
+
+
   // -----------------模态框----------------
   showModal: function (e) {
     console.log('展示模态框')
@@ -180,7 +204,7 @@ Page({
   // ListTouch计算方向
   ListTouchMove(e) {
     this.setData({
-      ListTouchDirection: e.touches[0].pageX - this.data.ListTouchStart > 30 ? 'right' : 'left'
+      ListTouchDirection: this.data.ListTouchStart - e.touches[0].pageX > 30 ? 'left' : 'right'
     })
   },
 
@@ -202,17 +226,46 @@ Page({
   },
   DeleteHandle: function (e) {
     var AnnouceMent = this.data.AnnouceMent
+    var index = e.currentTarget.dataset.index
+    var id = AnnouceMent[index]._id
 
     AnnouceMent.splice(e.currentTarget.dataset.index, 1)
     this.setData({
       AnnouceMent: AnnouceMent,
     })
-  },
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'annoucementDelete',
+      // 传给云函数的参数
+      data: {
+        ID: id,
+      },
+      complete: res => {
+        console.log(res)
 
-  //-----------------分享给好友带参数---------
+      }
+    })
+  },
+  
+
+
+  //-----------------分享给好友不带参数---------
   onShareAppMessage: function () {
     var that = this;
+    console.log("分享不带参数")
 
+    return {
+      title: '舍佐',
+      path: '/pages/index/index',
+
+    }
+
+  },
+
+  //-----------------分享给好友不带参数---------
+  onShareAppMessageBackup: function () {
+    var that = this;
+    console.log("分享带参数")
     return {
       title: '舍佐',
       path: '/pages/index/index?userDormid=' + userDormid,
@@ -226,7 +279,7 @@ Page({
 
   //-----------------------onLoad------------------
   onLoad: function (options) {
-    wx.stopPullDownRefresh()
+    wx.stopPullDownRefresh()//停止下拉刷新
     var that = this
 
 
@@ -318,7 +371,17 @@ Page({
   },
 
   onShow: function () {
-
+    console.log(app.globalData.dormid)
+    db.collection('Annoucement').where({
+      dormid: '6cd397ca5ce9592f057a1b590486ed4e'
+    })
+      .get()
+      .then(res => {
+        console.log(res.data)
+        this.setData({
+          AnnouceMent: res.data
+        })
+      })
 
   },
 
@@ -335,7 +398,7 @@ Page({
   getUserInfo: function (e) {
     var that = this
     usere = e
-    console.log('用户信息:' + e.detail.userInfo)
+    console.log('用户信息:' + JSON.stringify(e.detail.userInfo))
 
     // ============重构==============
     // 获取当前用户的openid 
@@ -344,6 +407,7 @@ Page({
       complete: res => {
         console.log('云函数获取到的当前用户openid: ', res.result.openId)
         openid = res.result.openId;
+        app.globalData.Myopenid = res.result.openId;
         //查询数据库是否有当前用户的数据
         db.collection('userInfo').where({
 
@@ -359,7 +423,8 @@ Page({
               db.collection('userInfo').add({
                 data: {
 
-                  user: e.detail.userInfo.avatarUrl
+                  user: e.detail.userInfo.avatarUrl,
+                  nickName: e.detail.userInfo.nickName
 
                 }
               }).then(res => {
@@ -429,12 +494,17 @@ Page({
 
             }).get().then(
               res => {
+                console.log("res.data:" + JSON.stringify(res.data))
                 for (var i = 0; i < res.data.length; i++) {
                   imageUrl[i] = res.data[i].user
                   userOpenid[i] = res.data[i]._openid
+                  nickName[i] = res.data[i].nickName
+
                 }
                 app.globalData.imageUrl = imageUrl
                 app.globalData.userOpenid = userOpenid
+                app.globalData.nickName = nickName
+                app.globalData.dormid = res.data[0].dormid
                 that.setData({ imageUrl: app.globalData.imageUrl })
                 // console.log(that.data.imageUrl)
                 console.log("全局相同dormid的数据imageUrl:" + app.globalData.imageUrl)
