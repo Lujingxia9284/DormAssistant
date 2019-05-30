@@ -102,7 +102,7 @@ Page({
           for(var j=0;j<array.length;j++){
 
             if(array[j].billpart==parts[i].part){
-              partsum+=Number(array[i].amount);
+              partsum+=Number(array[j].amount);
             }
           }
           var string = "parts[" + i + "].sum";

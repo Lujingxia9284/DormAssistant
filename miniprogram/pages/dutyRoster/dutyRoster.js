@@ -301,6 +301,7 @@ Page({
   },
 
   onShow: function () {
+    this.onLoad()
     var that=this
     if (mode) {
                 var dict = [];
