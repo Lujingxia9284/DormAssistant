@@ -6,5 +6,6 @@ cloud.init()
 cloud.init()
 //获取用户的openid
 exports.main = async (event, context) => {
+  let  a = event
   return event.userInfo; //返回用户信息
 }

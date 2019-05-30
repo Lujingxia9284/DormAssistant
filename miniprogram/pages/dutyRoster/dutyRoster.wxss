@@ -45,6 +45,7 @@
 
 .container {
   flex-direction: row;
+  align-items: flex-start ;
   flex-wrap: wrap;
 }
 
@@ -116,7 +117,7 @@ picker-view-column{
     margin-right:40rpx;
     display:inline-block;
     width:100rpx;
-    height:140rpx;
+    height:100rpx;
     padding:5rpx;
     vertical-align:middle;
 }

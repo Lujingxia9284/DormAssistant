@@ -137,4 +137,3 @@
         </view>
     </view>
 </view>
-<button open-type="share"  bindtap="onShareAppMessageBackup">分享</button>
