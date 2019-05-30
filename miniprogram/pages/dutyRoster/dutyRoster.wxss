@@ -43,18 +43,13 @@
 
 /* 值日周期模态框设置 */
 
-.container1 {
+.container {
   flex-direction: row;
   align-items: flex-start ;
   flex-wrap: wrap;
   align-items:none;
 }
 
-.container2 {
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items:none;
-}
 
 
 
