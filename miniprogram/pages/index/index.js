@@ -285,7 +285,7 @@ Page({
 
   },
 
-  
+
 
   // 登陆
 
@@ -447,7 +447,7 @@ Page({
               console.log(res.data)
               this.setData({
                 AnnouceMent: res.data,
-                
+
               })
             })
 
@@ -469,7 +469,9 @@ Page({
                   imageUrl[i] = res.data[i].user
                   userOpenid[i] = res.data[i]._openid
                   nickName[i] = res.data[i].nickName
-
+                  if(res.data[i]._openid==openid){
+                    app.globalData.myAvatar=res.data[i].user
+                  }
                 }
                 app.globalData.imageUrl = imageUrl
                 app.globalData.userOpenid = userOpenid
