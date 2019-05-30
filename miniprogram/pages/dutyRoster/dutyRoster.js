@@ -152,6 +152,7 @@ Page({
 
 
   onLoad: function (options) {
+    wx.stopPullDownRefresh()//停止下拉刷新
     var that = this
     that.setData({
       imageUrl: app.globalData.imageUrl
@@ -347,8 +348,12 @@ Page({
 
 
   },
-
-
+//----------下拉刷新--------------------
+  onPullDownRefresh: function () {
+    
+    this.onLoad(); //重新加载onLoad()
+    this.onShow();
+  },
 
 
 
@@ -357,7 +362,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+  
 
   }
 
