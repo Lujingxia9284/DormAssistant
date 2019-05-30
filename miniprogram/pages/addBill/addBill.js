@@ -28,7 +28,7 @@ Page({
     openid:[],
     imageUrl:[],
     nonPay: [],
-    userInfo:{},
+    myAvatar:'',
 
     billmoney: '',        // 金额总数
     flat: true,           //是否平摊的按钮
@@ -40,7 +40,7 @@ Page({
     this.setData({
       openid :app.globalData.userOpenid,
       imageUrl : app.globalData.imageUrl,
-      userInfo : app.globalData.userInfo,
+      myAvatar : app.globalData.myAvatar,
       dormid :app.globalData.dormid
     })
     var param = {};
@@ -54,7 +54,6 @@ Page({
         payDuty:true,
         amount:''
       })
-
       // var str1 = "nonPay[" + i + "].openid";
       // var str2 = "nonPay[" + i + "].avtUrl";
       // param[str1] = openid[i]
@@ -64,6 +63,7 @@ Page({
     this.setData({
       nonPay : nonPay
     })
+
     console.log('更新后的',this.data.nonPay)
 
 
@@ -225,7 +225,7 @@ Page({
               billpart: parts[index].part,
               equalDate: false,
               Payfinish: false,
-              avtUrl : this.data.userInfo.avatarUrl,
+              avtUrl : this.data.myAvatar,
               dormid : this.data.dormid
 
             }
