@@ -11,19 +11,24 @@
                 ></image>
             </view>
 
-            <view class="text-lg text-grey" >{{item.name}}</view>
+            <view class="{{ partindex==index? 'text-olive' : 'text-grey'}}"
+            style="font-size: 26rpx;">{{item.name}}</view>
         </view>
     </view>
-    <view class="flex cu-form-group justify-center padding " >
+    <view class="flex bg-white justify-center  padding" >
+        <view class="padding-lr-xs flex justify-center align-center inputview">
             <input
             name="billname"
             maxlength="10"
             placeholder="最多输入十个字.."
-            style="width:600rpx;height:56rpx;border: 1rpx solid #999;border-radius: 10rpx;">
+            style="height:54rpx;width:580rpx;"
+            >
             </input>
+        </view>
+
     </view>
-    <view class="cu-form-group margin-top">
-        <view class="title">日期</view>
+    <view class="cu-form-group margin-top" style="margin-top:40rpx">
+        <view class="title text-grey">日期</view>
         <picker
         name="billdate"
         mode="date"
@@ -37,21 +42,21 @@
         </picker>
     </view>
     <view class="cu-form-group">
-        <view class="title">金额</view>
+        <view class="title text-grey">金额</view>
         <input
         value="{{ billmoney }}"
         name="billsum"
         placeholder="请输入..."
-        style="text-align: center;"
+        style="text-align: right;"
         bindblur="BillMoney"
         type="number"></input>
     </view>
     <view class="cu-form-group">
-        <view class="title">是否平摊</view>
+        <view class="title text-grey">是否平摊</view>
         <switch checked bindtap="flatHandle"></switch>
     </view>
-    <view class=" margin-top padding flex bg-white align-center" style="height:200rpx"  >
-         <view class=" margin-right-xl " style="width:120rpx">成员</view>
+    <view class=" padding flex bg-white " style="height:200rpx;margin-top:40rpx"  >
+        <view class=" margin-right-xl text-grey member" style="font-size:30rpx">成员</view>
         <scroll-view scroll-x class="justify-center" style="width:560rpx; white-space: nowrap;">
             <view class="members" wx:for="{{ nonPay }}" wx:key >
                 <image src="{{ item.avtUrl }}"
@@ -78,7 +83,7 @@
 
     </view>
 
-    <view class="cu-form-group padding flex justify-center">
+    <view class="cu-form-group padding flex justify-center" style="padding-top: 40rpx;">
         <view class="flex justify-center " >
             <button formType="submit" style="width:475rpx;background-color: #6c9;" class="cu-btn bg-olive round lg shadow">确认</button>
         </view>

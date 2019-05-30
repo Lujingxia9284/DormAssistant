@@ -46,6 +46,7 @@
 .container {
   flex-direction: row;
   flex-wrap: wrap;
+  align-items:none;
 }
 
 .duty-circle {
@@ -93,7 +94,7 @@
 /* 选择器样式 */
 
 .color{
-	width: 80rpx; 
+	width: 80rpx;
 	/* height: 2rpx; */
 	color: #6c9;
 	font-size:12px;
@@ -116,7 +117,7 @@ picker-view-column{
     margin-right:40rpx;
     display:inline-block;
     width:100rpx;
-    height:140rpx;
+    height:100rpx;
     padding:5rpx;
     vertical-align:middle;
 }

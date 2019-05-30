@@ -33,31 +33,43 @@ Page({
   },
 
   onShow:function(options) {
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'getBill',
+      // 传给云函数的参数
+      data: {
+        dormid : this.data.dormid
+      },
+      complete: res => {
+        console.log('ok',res)
+        var array=res.result.data
 
-    // 以升序取出数据库中的账单
-    db.collection('bill').where({
-      dormid : this.data.dormid
-    })
-    .orderBy('billdate','asc')
-    .get().then(res=>{
-      console.log(res.data)
-      this.setData({
-        billpart:res.data
-      })
-      console.log(this.data.billpart)
-
-      var array=this.data.billpart;
-      //相同日期的在同一时间线里
-      for(var i=1;i<array.length;i++){
-        if(array[i].billdate==array[i-1].billdate){
-            array[i].equalDate=true
-          }
+        // var array=this.data.billpart;
+        //相同日期的在同一时间线里
+        for(var i=1;i<array.length;i++){
+          if(array[i].billdate==array[i-1].billdate){
+              array[i].equalDate=true
+            }
+        }
+        console.log('排序成功')
+        this.setData({
+          billpart : array
+        })
+        console.log(this.data.billpart)
       }
-      console.log('排序成功')
-      this.setData({
-        billpart : array
-      })
     })
+    // 以升序取出数据库中的账单
+    // db.collection('bill').where({
+    //   dormid : this.data.dormid
+    // })
+    // .orderBy('billdate','asc')
+    // .get().then(res=>{
+    //   console.log(res.data)
+    //   this.setData({
+    //     billpart:res.data
+    //   })
+
+    // })
 
     //实现我的付款和他人付款的更新
     db.collection('bill').where({

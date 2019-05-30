@@ -16,7 +16,7 @@
             <view class="flex-sub flex justify-center align-center" >
                 <view class="flex-direction justify-center" style="text-align:center;" >
                     <image src="{{ item.avtUrl }}" class="avatar" style="vertical-align: center;margin-right:10rpx"></image>
-                    <view class="text-lg padding-xs margin-right-xs text-cut" style="text-align :center;width:200rpx;">{{ userInfo.nickName }}</view>
+                    <view class="text-lg padding-xs margin-right-xs text-cut" style="text-align :center;width:200rpx;">{{ item.nickName }}</view>
                 </view>
             </view>
             <view class="flex-twice flex align-center margin-left-lg padding-left">
@@ -30,14 +30,14 @@
         </view>
     </view>
     <block wx:if="{{ item.showDetails }}">
-    <view class="bg-white solid-bottom padding-lg flex" wx:for="{{ item.bills }}" wx:key  style="height:165rpx">
+    <view class="bg-grey light solid-bottom padding-lg  flex" wx:for="{{ item.bills }}" wx:key  style="height:140rpx;border-radius: 10rpx; margin:25rpx 40rpx;">
         <view class="flex-sub flex align-center justify-center" >
             <image src="../../image/{{ item.billpart }}active.png" class="part"></image>
         </view>
         <view
         class=" flex-direction flex justify-center margin-left-xs"
         style="width:360rpx;margin-left:20rpx">
-            <view class="text-lg text-black">{{ item.billname }}</view>
+            <view class="text-df text-black">{{ item.billname }}</view>
             <view class="text-price text-black">{{ item.billsum }}</view>
         </view>
         <view class="flex-sub  align-center flex justify-center">
@@ -48,10 +48,25 @@
 
 
 </view>
+<view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-title text-olive"></text>
+      <view class="text-lg text-shadow">统计</view>
+    </view>
+</view>
+<view class="cu-list grid col-4 no-border ">
+    <view class="cu-item" wx:for="{{parts}}" wx:key>
+        <view class="padding-xs">
+            <image class="part"
+            src="../../image/{{ item.part+'active'}}.png"
+            ></image>
+        </view>
 
+        <view class="text-lg text-grey text-price" >{{ item.sum }}</view>
+    </view>
+</view>
 
-
-<view class="cu-item bg-white solid-bottom margin-top"  >
+<!-- <view class="cu-item bg-white solid-bottom margin-top"  >
     <radio-group class="block">
         <view class="cu-form-group flex" style="height:260rpx">
             <view class="title">提醒周期</view>
@@ -73,4 +88,4 @@
             {{time}}
         </view>
     </picker>
-</view>
+</view> -->

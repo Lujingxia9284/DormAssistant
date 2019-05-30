@@ -73,7 +73,7 @@
 </view>
 <!-- 路由 -->
 <view class="cu-bar foot bg-white justify-center">
-    <view class="flex justify-center " >
+    <view class="flex justify-center margin-bottom" >
         <button type="" style="width:475rpx;background-color: #6c9;" class="cu-btn bg-olive round lg shadow" bindtap="TononPayment">我的未付款
         </button>
     </view>
