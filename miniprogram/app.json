@@ -1,9 +1,10 @@
 {
   "pages": [
-    "pages/index/index",
+
+  "pages/index/index",
   "pages/addBill/addBill",
   "pages/nonPayment/nonPayment",
-  
+
    "pages/publicBill/publicBill",
 
     "pages/dutyRoster/dutyRoster"
@@ -16,9 +17,9 @@
     "navigationBarTextStyle": "white",
     "navigationStyle":"custom",
     "enablePullDownRefresh": true ,
-    "backgroundTextStyle": "dark" 
+    "backgroundTextStyle": "dark"
 
-    
+
   },
   "usingComponents": {
     "cu-custom": "../colorui/components/cu-custom"

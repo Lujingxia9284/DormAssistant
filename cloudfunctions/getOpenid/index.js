@@ -3,7 +3,7 @@ const cloud = require('wx-server-sdk')
 
 cloud.init()
 
-cloud.init()
+
 //获取用户的openid
 exports.main = async (event, context) => {
   let  a = event

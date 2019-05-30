@@ -13,25 +13,25 @@ Page({
     curYear: new Date().getFullYear(), // 年份
     curMonth: new Date().getMonth() + 1,// 月份 1-12
     day: new Date().getDate(), // 日期 1-31 若日期超过该月天数，月份自动增加
-    header_show:true ,
-    next:true,
-    appear:false,
-    closelaststyle:true,
-    colored:"#DDDDDD",
+    header_show: true,
+    next: true,
+    appear: false,
+    closelaststyle: true,
+    colored: "#DDDDDD",
     prev: true, // 上一个月按钮是否显示
     next: true, // 下一个月按钮是否显示\
-    selectedDate:"",
-    circle_show:false,//日期下方圆点
+    selectedDate: "",
+    circle_show: false,//日期下方圆点
     mystatus: [],
-    showView:false,
+    showView: false,
     value: [],
-    showPicker:true, //值日生选择器是否出现 false是固定日期
+    showPicker: true, //值日生选择器是否出现 false是固定日期
     speciallist: [
       { date: '2019-05-12', background: '#6c9' },
     ],
-    
 
-    
+
+
 
     // 时间选择器
     time: '12:01',
@@ -44,12 +44,12 @@ Page({
     // arr7: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
     // arr8: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
     array: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
-   
-   
+
+
   },
 
-//值日周期复选框事件
-  radio1Change: function(){
+  //值日周期复选框事件
+  radio1Change: function () {
     var that = this;
     that.setData({
       showPicker: false
@@ -67,22 +67,22 @@ Page({
   //---------viewPicker绑定事件---------------------------------------------
   bindChange: function (e) {
     const val = e.detail.value
-    arrayValue= this.data.array[val[0]]  
+    arrayValue = this.data.array[val[0]]
     this.setData({
-      arrayValue:this.data.array[val[0]]  
+      arrayValue: this.data.array[val[0]]
     })
-    
+
   },
- 
+
   bind1Change: function (e) {
     const val = e.detail.value
     dutyWeek[0] = this.data.arr1[val[0]]
     this.setData({
       arr1Value: this.data.arr1[val[0]],
-      
+
     })
-    
-    console.log("滚动视图的值1："+this.data.arr1Value)
+
+    console.log("滚动视图的值1：" + this.data.arr1Value)
   },
   bind2Change: function (e) {
     const val = e.detail.value
@@ -158,66 +158,63 @@ Page({
 
 
 
-  
+
   //========时间选择器绑定事件
-  TimeChange:function(){
+  TimeChange: function () {
     this.setData({
       time: e.detail.value
     })
   },
 
 
-  
 
-  
+
+
   onLoad: function (options) {
-    var that =this
+    var that = this
     that.setData({
-      imageUrl:app.globalData.imageUrl
+      imageUrl: app.globalData.imageUrl
     })
-    
+
     db.collection('dutyStatus').doc('1cfa02f8-c33f-4ab4-9f5c-5c3e0e04dee2').get({
       success: function (res) {
         console.log("成功读取数据库" + JSON.stringify(res.data))
         arrayValue = res.data.dutyDay
         console.log("arrayValue" + arrayValue)
         dutyWeek = res.data.dutyWeek
-        mode=res.data.mode
-        console.log("mode:"+mode)
+        mode = res.data.mode
+        console.log("mode:" + mode)
         that.setData({
           arrayValue: res.data.dutyDay
         })
         //-----设置当前用户值日天----------------------
+        
         console.log("周几" + dutyWeek[that.data.index])
-        if(mode)
-        {
-            var dict = [];
-        console.log("打印arrayValue："+arrayValue)
+        if (mode) {
+          var dict = [];
+          console.log("打印arrayValue：" + arrayValue)
 
 
           console.log("循环" + nowDate)
-          for (var i = that.data.length * that.data.index; i < that.data.length * that.data.index + arrayValue; i++)
-
-          {
+          for (var i = that.data.length * that.data.index; i < that.data.length * that.data.index + arrayValue; i++) {
             dict.push({
-              date: that.newDay(nowDate,i),
+              date: that.newDay(nowDate, i),
               background: '#6c9'
             });
             var tempDay = that.newDay(nowDate, i)
-            for(var j=1;j<100;j++)
-            {
-            dict.push({
-              date: that.newDay(tempDay, that.data.length*arrayValue*j),
-              background: '#6c9'
-            });
+            for (var j = 1; j < 100; j++) {
+              dict.push({
+                date: that.newDay(tempDay, that.data.length * arrayValue * j),
+                background: '#6c9'
+              });
             }
 
-        }
-       that.setData({ speciallist: dict })
-        console.log("当前用户的值日天——1" + JSON.stringify(that.setData.speciallist))
+          }
+          that.setData({ speciallist: dict })
+          console.log("当前用户的值日天——1" + JSON.stringify(that.setData.speciallist))
 
         }
-        else{
+        else {
           var dict = []
           for (var i = 0; i < 100; i++) {
             var tempDay = that.newDay(nowDate, i)
@@ -227,22 +224,22 @@ Page({
                 date: tempDay,
                 background: '#6c9'
               });
-       
 
+
+            }
           }
+          that.setData({ speciallist: dict })
+          console.log("当前用户的值日天——2" + JSON.stringify(that.setData.speciallist))
         }
-        that.setData({ speciallist: dict })
-        console.log("当前用户的值日天——2" + JSON.stringify(that.setData.speciallist))
-        }
-      
+
 
 
       }
     })
 
-   
+
     //-------获取用户数量和下标索引-----------
-   that.setData({
+    that.setData({
       length: Object.keys(app.globalData.userOpenid).length
     })
     console.log("宿舍人数" + that.data.length)
@@ -266,19 +263,19 @@ Page({
     if (strDate >= 0 && strDate <= 9) {
       strDate = "0" + strDate;
     }
-     nowDate = date.getFullYear() + "-" + nowMonth + "-" + strDate;
+    nowDate = date.getFullYear() + "-" + nowMonth + "-" + strDate;
     console.log("日期：" + nowDate)
     console.log(that.data.arrayValue)
-  
 
 
- 
-    
+
+
+
     that.modalDuty = that.selectComponent("#modalDuty");//通过给组件所起的id调用组件
     that.modalAlert = that.selectComponent("#modalAlert");
   },
-  
-  
+
+
   //-------从dateTemp起days天后的数据---------------------------------------
   newDay: function getNewDay(dateTemp, days) {
     var dateTemp = dateTemp.split("-");
@@ -293,20 +290,20 @@ Page({
     return (year + "-" + month + "-" + date);
   },
   //------------------计算某一天为周几---------------
-getWeekByDay: function getWeekByDay(dayValue) { //dayValue=“2014-01-01”
-  var day = new Date(Date.parse(dayValue.replace(/-/g, '/'))); //将日期值格式化
-  var today = new Array("周日", "周一", "周二", "周三", "周四", "周五", "周六"); //创建星期数组
-  // console.log(today[day.getDay()])
-  return today[day.getDay()];  //返一个星期中的某一天，其中0为星期日
-},
+  getWeekByDay: function getWeekByDay(dayValue) { //dayValue=“2014-01-01”
+    var day = new Date(Date.parse(dayValue.replace(/-/g, '/'))); //将日期值格式化
+    var today = new Array("周日", "周一", "周二", "周三", "周四", "周五", "周六"); //创建星期数组
+    // console.log(today[day.getDay()])
+    return today[day.getDay()];  //返一个星期中的某一天，其中0为星期日
+  },
 
   //------按钮值日周期绑定函数----------
   showModalDuty: function () {
-   
-    this.modalDuty.showModal() 
-    console.log("用户头像"+this.data.imageUrl) 
-},
-  closeModalDuty:function(){
+
+    this.modalDuty.showModal()
+    console.log("用户头像" + this.data.imageUrl)
+  },
+  closeModalDuty: function () {
     var that = this
     that.modalDuty.closeModal()  //打开关闭值日周期
     wx.cloud.callFunction({
@@ -323,38 +320,38 @@ getWeekByDay: function getWeekByDay(dayValue) { //dayValue=“2014-01-01”
       },
       fail: console.error
     })
-    
+
   },
   showModalAlert: function () {
-    this.modalAlert.showModal()  
+    this.modalAlert.showModal()
   },
   closeModalAlert: function () {
     this.modalAlert.closeModal()  //打开关闭提醒设置
   },
   // 开启提醒绑定的函数
-  setAlert:function(){ 
+  setAlert: function () {
     var that = this;
     that.setData({
       showView: (!that.data.showView)
-    }) 
+    })
     console.log(this.data.showView);
-    
+
 
   },
 
-onShow:function(){
-  
-    
-  
-  
-  
+  onShow: function () {
 
 
 
 
 
 
-},
+
+
+
+
+
+  },
 
 
 
@@ -365,8 +362,7 @@ onShow:function(){
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-   
-    
+
+
   }
 })
-

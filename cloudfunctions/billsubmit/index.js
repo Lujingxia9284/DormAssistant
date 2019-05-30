@@ -6,9 +6,10 @@ const db = cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
   console.log(event)
+  var billId='';
   const { billname,billsum,billdate,billpart,equalDate,Payfinish } = event
   const { OPENID, APPID } = cloud.getWXContext() // 这里获取到的 openId 和 appId 是可信的
-  await db.collection('bill').add({
+  const bill=await db.collection('bill').add({
     data:{
       billname: billname,
       _openid: OPENID,
@@ -17,14 +18,10 @@ exports.main = async (event, context) => {
       billpart: billpart,
       equalDate: false,
       Payfinish: false
-    },
-    success(res){
-      console.log('ok',res)
-    }
+    }  
   })
   
   return {
-    OPENID,
-    APPID  
+    bill
   }
 }

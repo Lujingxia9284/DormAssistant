@@ -6,3 +6,7 @@
     width:80rpx;
     border-radius:50%;
 }
+.part{
+    width:64.6rpx;
+    height:58rpx;
+}

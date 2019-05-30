@@ -27,10 +27,10 @@
     <!-- 拖动状态栏 -->
     <block wx:if="{{hasUserInfo}}">
     <scroll-view scroll-y style="height:485rpx; overflow: auto;">
-        <view class="padding-tb-sm bg-white flex  align-center" wx:for="{{imageUrl}}" wx:for-item="i" wx:key>
+        <view class="padding-tb-sm bg-white flex  align-center" wx:for="{{ Users }}" wx:for-item="i" wx:key>
             <view class="basis-xs flex justify-center ">
                 <view class=" flex flex-direction " >
-                    <image src="{{i}}" class="avatar"></image>
+                    <image src="{{i.user}}" class="avatar"></image>
                 </view>
             </view>
             <view class="basis-xl ">
@@ -39,11 +39,12 @@
                         <image src="../../image/scrollbar.png" class="scrollBar"></image>
                     </movable-view>
                     <movable-view class="point"
-                    direction="horizontal"
+                    direction="{{ i._openid==openid ? 'horizontal' : 'none' }}"
                     style=""
-                    x="{{changeX}}" y="-5"
+                    x="{{i.stateLocation*propotion}}" y="-5"
                     bindchange="bindchagehandle"
                     bindtouchend="bindtouchendhandle"
+                    data-index="{{ index }}"
                     >
                         <image src="../../image/scroll.png" style="width:47rpx;height:50rpx"></image>
                     </movable-view>
@@ -70,7 +71,7 @@
         bindtouchmove="ListTouchMove"
         bindtouchend="ListTouchEnd"
         data-target="move-box-{{index}}"
-       
+
         >
             <view class="content flex "  >
                 <view class="flex margin-tb-lg solid-bottom padding-lr-lg align-center" >
@@ -126,7 +127,7 @@
 
 
 <!-- 按钮 -->
-<view class="padding flex justify-center bg-white" >
+<view class=" flex justify-center bg-white cu-bar foot" >
     <view class="flex justify-center align-center" >
         <view class="padding">
             <button type="" style="width:275rpx;background-color: #6c9;" class="cu-btn bg-olive round lg shadow" bindtap="TopublicBill">公帐单</button>

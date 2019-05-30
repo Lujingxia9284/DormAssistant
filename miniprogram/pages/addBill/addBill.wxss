@@ -27,3 +27,15 @@
     width:16rpx;
     height:16rpx;
 }
+.inputview{
+    width:599rpx;
+    height:56rpx;
+    border: 1rpx solid #999;
+    border-radius: 10rpx;
+
+}
+.member{
+    width:120rpx;
+    margin-top:27rpx;
+
+}
