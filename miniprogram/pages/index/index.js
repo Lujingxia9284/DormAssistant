@@ -262,31 +262,29 @@ Page({
 
 
 
-  //-----------------分享给好友不带参数---------
-  onShareAppMessage: function () {
-    var that = this;
-    console.log("分享不带参数")
-
-    return {
-      title: '舍佐',
-      path: '/pages/index/index',
-
-    }
-
-  },
-
-  //-----------------分享给好友不带参数---------
-  onShareAppMessageBackup: function () {
+  //-----------------分享给好友带参数---------
+  onShareAppMessage: function (res) {
     var that = this;
     console.log("分享带参数")
+    if (res.from === 'button') {
     return {
       title: '舍佐',
       path: '/pages/index/index?userDormid=' + userDormid,
 
     }
+    }
+    else if (res.from === 'menu'){
+      return {
+        title: '舍佐',
+        path: '/pages/index/index',
+
+      }
+
+    }
 
   },
 
+  
 
   // 登陆
 
@@ -418,6 +416,9 @@ Page({
               console.log("当前用户的dormid：" + res.data[0].dormid)
               userDormid = res.data[0].dormid
               //获取有相同dormid的用户数据
+              this.setData({
+                hasUserInfo:true
+              })
 
 
             }
@@ -433,7 +434,8 @@ Page({
             .then(res => {
               console.log(res.data)
               this.setData({
-                AnnouceMent: res.data
+                AnnouceMent: res.data,
+                
               })
             })
 
@@ -492,7 +494,8 @@ Page({
   onPullDownRefresh: function () {
 
     this.setData({ refreshStatus: true })
-    this.getUserInfo(usere); //
+    this.onLoad(); //
+    this.onShow();
   },
 
 
@@ -550,7 +553,7 @@ Page({
         })
 
       }
-      this.onShow()
+      that.onShow()
     })
 
   }

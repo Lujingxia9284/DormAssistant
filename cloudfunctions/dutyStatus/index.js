@@ -9,6 +9,7 @@ exports.main = async (event, context) => {
         dutyDay: event.dutyDay,
         dutyWeek:event.dutyWeek,
         mode: event.mode,
+        dormid:event.dormid,
       }
     })
   } catch (e) {

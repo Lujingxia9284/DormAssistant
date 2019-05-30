@@ -39,7 +39,7 @@
     
        
         <view class='line' ></view>
-      <view class="container">
+      <view class="container1">
         <view style="padding-left:35rpx;padding-right:60rpx;margin-top:70rpx">值日生</view>
     
 
@@ -137,7 +137,7 @@
   </view>
   <my-modal id="modalAlert" fadeStyle="slideUp" height="590rpx">
     <!-- 模态框里的内容 -->
-    <view class='container'>
+    <view class='container2'>
       <view class='duty-circle'>开启提醒</view>
       <view style=' padding-left:430rpx'>
         <switch class="sm" bindchange="setAlert"></switch>

@@ -1,10 +1,10 @@
 const app = getApp()
 wx.cloud.init()
 const db = wx.cloud.database()
-var arrayValue   //几天1人选择器的值
+var arrayValue=1  //几天1人选择器的值 默认一天
 var dutyWeek = ["周日", "周一", "周一", "周一", "周一", "周一", "周日", "周一",]
 var nowDate
-var mode  //选择值日模式，false为固定日期
+var mode=true  //选择值日模式，false为固定日期
 
 
 Page({
@@ -36,13 +36,6 @@ Page({
     // 时间选择器
     time: '12:01',
     arr1: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
-    // arr2: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
-    // arr3: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
-    // arr4: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
-    // arr5: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
-    // arr6: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
-    // arr7: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
-    // arr8: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
     array: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
 
 
@@ -147,18 +140,6 @@ Page({
     console.log("滚动视图的值8：" + this.data.arr1Value)
   },
 
-
-
-
-
-
-
-
-
-
-
-
-
   //========时间选择器绑定事件
   TimeChange: function () {
     this.setData({
@@ -175,67 +156,54 @@ Page({
     that.setData({
       imageUrl: app.globalData.imageUrl
     })
+   
 
-    db.collection('dutyStatus').doc('1cfa02f8-c33f-4ab4-9f5c-5c3e0e04dee2').get({
+    db.collection('dutyStatus').where({
+      dormid: app.globalData.dormid
+    }).get({
       success: function (res) {
-        console.log("成功读取数据库" + JSON.stringify(res.data))
-        arrayValue = res.data.dutyDay
+        if (JSON.stringify(res.data)=="[]"){
+          console.log("aaaaaxiebuwanle")
+          console.log("初始值："+arrayValue)
+          wx.cloud.callFunction({
+            name: 'dutyStatus',
+            data: {
+              dutyDay: arrayValue,
+              dutyWeek: dutyWeek,
+              mode: that.data.showPicker,
+              dormid: app.globalData.dormid
+            },
+            success: function (res) {}
+          })
+        }
+        else{
+          console.log("读取的数据："+JSON.stringify(res.data))
+          arrayValue = res.data[0].dutyDay
+        console.log("这里的arrayValue："+arrayValue)
         console.log("arrayValue" + arrayValue)
-        dutyWeek = res.data.dutyWeek
-        mode = res.data.mode
+        dutyWeek = res.data[0].dutyWeek
+        mode = res.data[0].mode
         console.log("mode:" + mode)
         that.setData({
-          arrayValue: res.data.dutyDay
+          arrayValue: res.data[0].dutyDay
         })
-        //-----设置当前用户值日天----------------------
-        
-        console.log("周几" + dutyWeek[that.data.index])
-        if (mode) {
-          var dict = [];
-          console.log("打印arrayValue：" + arrayValue)
-
-
-          console.log("循环" + nowDate)
-          for (var i = that.data.length * that.data.index; i < that.data.length * that.data.index + arrayValue; i++) {
-            dict.push({
-              date: that.newDay(nowDate, i),
-              background: '#6c9'
-            });
-            var tempDay = that.newDay(nowDate, i)
-            for (var j = 1; j < 100; j++) {
-              dict.push({
-                date: that.newDay(tempDay, that.data.length * arrayValue * j),
-                background: '#6c9'
-              });
-            }
-
-          }
-          that.setData({ speciallist: dict })
-          console.log("当前用户的值日天——1" + JSON.stringify(that.setData.speciallist))
-
         }
-        else {
-          var dict = []
-          for (var i = 0; i < 100; i++) {
-            var tempDay = that.newDay(nowDate, i)
-            if (that.getWeekByDay(tempDay) == dutyWeek[that.data.index]) {
-
-              dict.push({
-                date: tempDay,
-                background: '#6c9'
-              });
-
-
-            }
-          }
-          that.setData({ speciallist: dict })
-          console.log("当前用户的值日天——2" + JSON.stringify(that.setData.speciallist))
-        }
-
-
-
       }
-    })
+        })
+
+    //----------获取当前时间---------------------
+    var date = new Date();
+    var nowMonth = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (nowMonth >= 1 && nowMonth <= 9) {
+      nowMonth = "0" + nowMonth;
+    }
+
+    if (strDate >= 0 && strDate <= 9) {
+      strDate = "0" + strDate;
+    }
+    nowDate = date.getFullYear() + "-" + nowMonth + "-" + strDate;
+    console.log("日期：" + nowDate)
 
 
     //-------获取用户数量和下标索引-----------
@@ -252,20 +220,6 @@ Page({
       }
 
     }
-    //----------获取当前时间---------------------
-    var date = new Date();
-    var nowMonth = date.getMonth() + 1;
-    var strDate = date.getDate();
-    if (nowMonth >= 1 && nowMonth <= 9) {
-      nowMonth = "0" + nowMonth;
-    }
-
-    if (strDate >= 0 && strDate <= 9) {
-      strDate = "0" + strDate;
-    }
-    nowDate = date.getFullYear() + "-" + nowMonth + "-" + strDate;
-    console.log("日期：" + nowDate)
-    console.log(that.data.arrayValue)
 
 
 
@@ -305,6 +259,10 @@ Page({
   },
   closeModalDuty: function () {
     var that = this
+    console.log("完成后的数据："+arrayValue)
+    mode=that.data.showPicker
+    console.log("关闭模态框前的mode："+mode)
+   
     that.modalDuty.closeModal()  //打开关闭值日周期
     wx.cloud.callFunction({
       name: 'dutyStatus',
@@ -312,6 +270,7 @@ Page({
         dutyDay: arrayValue,
         dutyWeek: dutyWeek,
         mode: that.data.showPicker,
+        dormid:app.globalData.dormid
       },
       success: function (res) {
         console.log("云函数调用成功！") // 3
@@ -329,6 +288,7 @@ Page({
     this.modalAlert.closeModal()  //打开关闭提醒设置
   },
   // 开启提醒绑定的函数
+  
   setAlert: function () {
     var that = this;
     that.setData({
@@ -340,12 +300,47 @@ Page({
   },
 
   onShow: function () {
+    var that=this
+    if (mode) {
+                var dict = [];
+                console.log("打印arrayValue：" + arrayValue)
 
 
+                console.log("循环" + nowDate)
+                for (var i = arrayValue * that.data.index; i < arrayValue * (that.data.index + 1); i++) {
+                  dict.push({
+                    date: that.newDay(nowDate, i),
+                    background: '#6c9'
+                  });
+                  var tempDay = that.newDay(nowDate, i)
+                  for (var j = that.data.length * arrayValue; j < 100; j = j + that.data.length * arrayValue) {
+                    dict.push({
+                      date: that.newDay(tempDay, j),
+                      background: '#6c9'
+                    });
+                  }
 
+                }
+                that.setData({ speciallist: dict })
+                console.log("当前用户的值日天——1" + JSON.stringify(that.setData.speciallist))
 
+              }
+              else {
+                var dict = []
+                for (var i = 0; i < 100; i++) {
+                  var tempDay = that.newDay(nowDate, i)
+                  if (that.getWeekByDay(tempDay) == dutyWeek[that.data.index]) {
 
-
+                    dict.push({
+                      date: tempDay,
+                      background: '#6c9'
+                    });
+                  }
+                }
+                that.setData({ speciallist: dict })
+                console.log("当前用户的值日天——2" + JSON.stringify(that.setData.speciallist))
+          
+        }
 
 
 
@@ -365,4 +360,5 @@ Page({
 
 
   }
-})
+
+          })

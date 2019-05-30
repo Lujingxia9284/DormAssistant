@@ -52,7 +52,7 @@
             </view>
         </view>
          <view class="flex  padding justify-center" style="padding-left:120rpx;">
-            <button open-type='share' class="share" bindtap="onShareAppMessageBackup"></button>
+            <button open-type='share' class="share" bindtap="onShareAppMessage"></button>
             <image src="../../image/add.gif" class="addshare"></image>
         </view>
     </scroll-view>
