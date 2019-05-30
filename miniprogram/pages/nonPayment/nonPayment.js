@@ -118,76 +118,7 @@ Page({
 
       }
     })
-    // db.collection('nonPayment').where({
-    //   payNeedId : Myopenid,
-    //   Payfinish : false
-    // })
-    // .get()
-    // .then(res=>{
-    //   // 找到payneedid是本人的数据后遍历查找每个付款人的信息并设置总额
-    //   console.log(array)
-    //   var parts=this.data.parts
-    //   var param = {}
 
-    //   // 将每个付款人的未付款汇总
-    //   for(var i=0;i<openid.length;i++){
-    //     sum=0
-    //     nonPaymentDetails=[]
-    //     if(openid[i]!=Myopenid){
-    //       for(var j=0;j<res.data.length;j++){
-
-    //         if(res.data[j]._openid==openid[i]){
-    //           sum+=Number(res.data[j].amount)
-    //           console.log('OK',i,res.data[j]._openid)
-    //           nonPaymentDetails.push({
-    //             billdate: res.data[j].billdate,
-    //             billname: res.data[j].billname,
-    //             billpart: res.data[j].billpart,
-    //             billsum: res.data[j].amount,
-
-    //           })
-
-
-    //         }
-    //       }
-    //       nonPayment.push({
-    //         openid : openid[i],
-    //         avtUrl : imageUrl[i],
-    //         amount : sum,
-    //         nickname : nickName[i],
-    //         showDetails : false,
-    //         bills: nonPaymentDetails
-    //       })
-    //     }
-    //   }
-
-    //   for(var i=0;i<parts.length;i++){
-    //     var partsum=0;
-    //     for(var j=0;j<res.data.length;j++){
-
-    //       if(res.data[j].billpart==parts[i].part){
-    //         partsum+=Number(res.data[i].amount);
-    //       }
-    //     }
-    //     var string = "parts[" + i + "].sum";
-    //     param[string]=partsum;
-    //     this.setData(param);
-    //   }
-
-    //   this.setData({
-    //     nonPayment :nonPayment,
-    //     parts : parts
-    //   })
-    //   // ------------------------------------
-
-
-
-    //   console.log(nonPayment)
-    // })
-
-    // db.collection('nonPayment').where({
-
-    // })
 
   },
   TimeChange(e) {

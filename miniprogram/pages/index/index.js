@@ -43,6 +43,7 @@ Page({
     hideMod: true,
     AnnouceMent: [],
     Index: '',
+    fillHegiht:''
   },
 
 
@@ -295,8 +296,18 @@ Page({
     console.log(this.data.propotion)
     wx.stopPullDownRefresh()//停止下拉刷新
     var that = this
+    var query = wx.createSelectorQuery();
+    query.select('#state').boundingClientRect()
+    query.exec((res) => {
+      console.log(res)
+      // 获取list高度
+      var stateHeight=res[0].height
+      var fillHegiht=1334-128-res[0].height-420;
+      this.setData({
+        fillHegiht : fillHegiht
+      })
 
-
+    })
 
     console.log('userDormid' + userDormid)
     var that = this;
@@ -418,7 +429,9 @@ Page({
               console.log("当前用户的dormid：" + res.data[0].dormid)
               userDormid = res.data[0].dormid
               //获取有相同dormid的用户数据
-
+              that.setData({
+                hasUserInfo: true
+              })
 
             }
           },
@@ -450,7 +463,7 @@ Page({
                 this.setData({
                   Users :  res.data
                 })
-
+                console.log('Users',this.data.Users)
                 for (var i = 0; i < res.data.length; i++) {
                   imageUrl[i] = res.data[i].user
                   userOpenid[i] = res.data[i]._openid
@@ -492,7 +505,7 @@ Page({
   onPullDownRefresh: function () {
 
     this.setData({ refreshStatus: true })
-    this.getUserInfo(usere); //
+    this.onShow(); //
   },
 
 
@@ -550,7 +563,7 @@ Page({
         })
 
       }
-      this.onShow()
+      that.onShow()
     })
 
   }
