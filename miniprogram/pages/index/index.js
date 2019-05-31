@@ -46,25 +46,6 @@ Page({
     fillHegiht:''
   },
 
-
-
-
-
-
-
-
-
-
-
-  // ChangeState: function (e) {
-  //   var left = this.left;
-  //   var clientX = e.touches[0].clientX;
-  //   left = e.touches[0].clientX;
-  //   this.setData({ left: left });
-
-  // },
-
-
   addAnnoucement: function () {
     var AnnouceMent = this.data.AnnouceMent
     var DATE = util.formatDate(new Date())
@@ -168,12 +149,7 @@ Page({
         console.log(res)
       }
     })
-    // db.collection('Annoucement').where({
-    //   _id : AnnouceMent[index]._id
-    // }).update({
-
-    // })
-
+   
   },
 
 
@@ -269,15 +245,17 @@ Page({
     console.log("分享带参数")
     if (res.from === 'button') {
     return {
-      title: '舍佐',
+      title: app.globalData.myNickName+'邀请你进入舍佐',
       path: '/pages/index/index?userDormid=' + userDormid,
+      imageUrl:'../../image/shareImage.png'
 
     }
     }
     else if (res.from === 'menu'){
       return {
-        title: '舍佐',
+        title: app.globalData.myNickName + '邀请你进入舍佐',
         path: '/pages/index/index',
+        imageUrl: '../../image/shareImage.png'
 
       }
 
@@ -315,45 +293,6 @@ Page({
       shareDormid = options.userDormid
     };
 
-    //========控制显示
-    // wx.cloud.callFunction({
-    //   name: 'getOpenid',
-    //   complete: res => {
-    //     console.log('云函数获取到的当前用户openid: ', res.result.openId)
-    //     openid = res.result.openId;
-    //     //查询数据库是否有当前用户的数据
-    //     db.collection('userInfo').where({
-
-    //       _openid: openid
-
-    //     }).get({
-    //       //数据库中已有当前用户数据
-    //       success: res => {
-    //         console.log("hhhhhhhhhhhhhhhhh:" + res.data)
-    //         if (res.data != "") {
-
-    //           that.setData({
-
-    //            hasUserInfo: true
-    //           })
-    //           console.log("hasUserInfo:"+that.data.hasUserInfo)
-    //       }
-    //         }
-    //     })
-    //         }
-    //         })
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     wx.showShareMenu({
@@ -361,42 +300,11 @@ Page({
     });
 
 
-    //-----用户数据设全局--------------------------------------------------------------
-    // if (app.globalData.userInfo) {
-    //   that.setData({
-    //     // userInfo: app.globalData.userInfo,
-    //     hasUserInfo: true
-    //   })
-    // } else if (that.data.canIUse){
-    //   // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-    //   // 所以此处加入 callback 以防止这种情况
-    //   app.userInfoReadyCallback = res => {
-    //     that.setData({
-    //       // userInfo: res.userInfo,
-    //       hasUserInfo: true
-    //     })
-
-    //   }
-    // } else {
-    //   // 在没有 open-type=getUserInfo 版本的兼容处理
-    //   wx.getUserInfo({
-    //     success: res => {
-    //       app.globalData.userInfo = res.userInfo
-    //       that.setData({
-    //         // userInfo: res.userInfo,
-    //         hasUserInfo: true
-    //       })
-    //     }
-    //   })
-    // }
-
-
   },
 
   onShow: function () {
     var that=this
     console.log(app.globalData.dormid)
-
     wx.cloud.callFunction({
       name: 'getOpenid',
       complete: res => {
@@ -471,6 +379,7 @@ Page({
                   nickName[i] = res.data[i].nickName
                   if(res.data[i]._openid==openid){
                     app.globalData.myAvatar=res.data[i].user
+                    app.globalData.myNickName=res.data[i].nickName
                   }
                 }
                 app.globalData.imageUrl = imageUrl
