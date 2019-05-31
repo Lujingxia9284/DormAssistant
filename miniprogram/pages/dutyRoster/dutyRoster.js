@@ -167,7 +167,6 @@ Page({
     }).get({
       success: function (res) {
         if (JSON.stringify(res.data)=="[]"){
-          console.log("aaaaaxiebuwanle")
           console.log("初始值："+arrayValue)
           wx.cloud.callFunction({
             name: 'dutyStatus',
@@ -181,7 +180,7 @@ Page({
           })
         }
         else{
-          console.log("读取的数据："+JSON.stringify(res.data))
+          
           arrayValue = res.data[0].dutyDay
         console.log("这里的arrayValue："+arrayValue)
         console.log("arrayValue" + arrayValue)
@@ -312,7 +311,7 @@ Page({
                 console.log("打印arrayValue：" + arrayValue)
 
 
-                console.log("循环" + nowDate)
+                
                 for (var i = arrayValue * that.data.index; i < arrayValue * (that.data.index + 1); i++) {
                   dict.push({
                     date: that.newDay(nowDate, i),

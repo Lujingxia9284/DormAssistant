@@ -143,7 +143,7 @@
   <my-modal id="modalAlert" fadeStyle="slideUp" height="590rpx">
     <!-- 模态框里的内容 -->
       <view class="cu-form-group flex" style="height:180rpx">
-            <view class="title"style="margin-left:18rpx">值日周期</view>
+            <view class="title"style="margin-left:18rpx">开启提醒</view>
             <switch class="sm" bindchange="setAlert"></switch>
             </view>
 

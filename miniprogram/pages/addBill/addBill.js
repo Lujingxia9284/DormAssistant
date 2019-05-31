@@ -103,13 +103,7 @@ Page({
     this.setData({
       billmoney: e.detail.value
     })
-    // var nonPay=this.data.nonPay;
-    // for(var i=0;i<nonPay.length;i++){
-    //   if(nonPay[i].payDuty==true){
-    //     nonPay[i].amount = e.detail.value/this.data.paynum
-    //     console.log(nonPay[i].amount)
-    //   }
-    // }
+   
     console.log(billmoney)
   },
 //不平摊时获取每个每个成员的金额并更新总数
@@ -260,27 +254,7 @@ Page({
             }
 
           })
-      // wx.cloud.callFunction({
-      //   // 云函数名称
-      //   name: 'billsubmit',
-      //   // 传给云函数的参数
-      //   data: {
-      //     billname: formdata.billname,
-      //     billsum: this.data.billmoney,
-      //     billdate: formdata.billdate,
-      //     billpart: parts[index].part,
-      //     equalDate: false,
-      //     Payfinish: false
-      //   },
-      //   complete: res => {
-      //     this.setData({
-      //       billId : res.result._id
-      //     })
-      //     console.log('返回的数据',this.data.billId)
-
-      //   }
-      // })
-      //传递未付款信息
+      
 
 
 

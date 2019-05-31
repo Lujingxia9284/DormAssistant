@@ -1,7 +1,7 @@
 //app.js
 App({
-  globalData:{
-    _openid : "oPoCf4ufDIPpNFZaCOnJTNDMDjgY",
+  globalData: {
+    _openid: "oPoCf4ufDIPpNFZaCOnJTNDMDjgY",
   },
 
   onLaunch: function () {
@@ -18,9 +18,12 @@ App({
     wx.getSystemInfo({
       success: e => {
         this.globalData.StatusBar = e.statusBarHeight;
+
         let custom = wx.getMenuButtonBoundingClientRect();
         this.globalData.Custom = custom;
-        this.globalData.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
+        console.log(custom)
+        var propotion = wx.getSystemInfoSync().windowWidth / 375
+        this.globalData.CustomBar = (custom.bottom + custom.top - e.statusBarHeight) * propotion;
       }
     })
   },
