@@ -73,6 +73,7 @@ Page({
             for(var j=0;j<array.length;j++){
 
               if(array[j]._openid==openid[i]){
+                array[j].amount=array[j].amount.substring(0,4)
                 sum+=Number(array[j].amount)
                 console.log('OK',i,array[j]._openid)
                 nonPaymentDetails.push({
@@ -102,6 +103,7 @@ Page({
           for(var j=0;j<array.length;j++){
 
             if(array[j].billpart==parts[i].part){
+              array[j].amount=array[j].amount.substring(0,4)
               partsum+=Number(array[j].amount);
             }
           }

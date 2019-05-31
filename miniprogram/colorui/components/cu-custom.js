@@ -14,7 +14,7 @@ Component({
     bgColor: {
       type: String,
       default: ''
-    }, 
+    },
     isCustom: {
       type: [Boolean, String],
       default: false
@@ -41,9 +41,29 @@ Component({
    */
   methods: {
     BackPage() {
-      wx.navigateBack({
-        delta: 1
-      });
+      var pages = getCurrentPages() //获取加载的页面
+      var currentPage = pages[pages.length-1]
+      var url = currentPage.route //当前页面url
+      console.log(url)
+      if(url == 'pages/publicBill/publicBill'){
+        wx.reLaunch({
+          url: '../../pages/index/index',
+        })
+      }else if(url== 'pages/nonPayment/nonPayment'){
+        wx.reLaunch({
+          url: '../../pages/publicBill/publicBill',
+        })
+      }else if(url== 'pages/addBill/addBill'){
+        wx.reLaunch({
+          url: '../../pages/publicBill/publicBill',
+        })
+      }else if(url== 'pages/dutyRoster/dutyRoster'){
+        wx.reLaunch({
+          url: '../../pages/index/index',
+        })
+      };
+
+
     },
     toHome(){
       wx.reLaunch({
