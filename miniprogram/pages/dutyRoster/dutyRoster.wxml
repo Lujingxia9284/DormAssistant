@@ -6,7 +6,10 @@
 
 <calendar cur-year="{{curYear}}" cur-month="{{curMonth}}" day="{{day}}" header_show='{{header_show}}' next='{{next}}' appear='{{appear}}' closelaststyle='{{closelaststyle}}' colored='{{colored}}' prev='{{prev}}' next='{{next}}' speciallist='{{speciallist}}'
   selectedDate='{{selectedDate}}' mystatus='{{mystatus}}' circle_show="{{false}}" />
-<image  src="../../image/circle" ></image>
+  <view class="container">
+<image  src="../../image/circle.png" style="height:60rpx;width:60rpx;margin-left:50rpx"></image>
+<view style="margin-top:14rpx;margin-left:10rpx">我的值日天</view>
+</view>
 <view class="btnview">
   <view class="flex justify-center margin-bottom-lg">
     <button type="" style="width:475rpx;background-color: #6c9;" class="cu-btn bg-olive round lg shadow" bindtap="showModalDuty">值日周期</button>
@@ -137,11 +140,11 @@
   </view>
   <my-modal id="modalAlert" fadeStyle="slideUp" height="590rpx">
     <!-- 模态框里的内容 -->
-    <view class='container'>
-      <view class='duty-circle'>开启提醒</view>
-      <view style=' padding-left:430rpx'>
-        <switch class="sm" bindchange="setAlert"></switch>
-      </view>
+      <view class="cu-form-group flex" style="height:180rpx">
+            <view class="title"style="margin-left:18rpx">值日周期</view>
+            <switch class="sm" bindchange="setAlert"></switch>
+            </view>
+
       <view class='line'></view>
 
 
@@ -169,7 +172,7 @@
           <button type="" style="width:475rpx;background-color: #6c9;" class="cu-btn bg-olive round lg shadow" bindtap='closeModalAlert'>完成</button>
         </view>
       </view>
-    </view>
+    <!-- </view> -->
 
   </my-modal>
 

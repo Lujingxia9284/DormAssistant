@@ -152,8 +152,11 @@ Page({
 
 
   onLoad: function (options) {
+    console.log("执行onload")
     wx.stopPullDownRefresh()//停止下拉刷新
     var that = this
+    that.onShow()
+   
     that.setData({
       imageUrl: app.globalData.imageUrl
     })
@@ -301,8 +304,9 @@ Page({
   },
 
   onShow: function () {
-    this.onLoad()
+    console.log("执行onshow")
     var that=this
+  
     if (mode) {
                 var dict = [];
                 console.log("打印arrayValue：" + arrayValue)
