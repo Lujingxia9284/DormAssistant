@@ -1,6 +1,5 @@
 <cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
     <view slot="backText">我的未付款</view>
-
 </cu-custom>
 
 <view class="cu-bar bg-white solid-bottom ">
@@ -30,7 +29,7 @@
         </view>
     </view>
     <block wx:if="{{ item.showDetails }}">
-    <view class="bg-grey light solid-bottom padding-lg  flex" wx:for="{{ item.bills }}" wx:key  style="height:140rpx;border-radius: 10rpx; margin:25rpx 40rpx;">
+    <view class="bg-grey light solid-bottom   flex" wx:for="{{ item.bills }}" wx:key  style="height:140rpx;border-radius: 10rpx; margin:25rpx 40rpx;padding:20rpx;">
         <view class="flex-sub flex align-center justify-center" >
             <image src="../../image/{{ item.billpart }}active.png" class="part"></image>
         </view>
@@ -38,7 +37,7 @@
         class=" flex-direction flex justify-center margin-left-xs"
         style="width:360rpx;margin-left:20rpx">
             <view class="text-df text-black">{{ item.billname }}</view>
-            <view class="text-price text-black">{{ item.billsum }}</view>
+            <view class="text-price text-black text-cut">{{ item.billsum }}</view>
         </view>
         <view class="flex-sub  align-center flex justify-center">
             {{ item.billdate }}
@@ -62,7 +61,7 @@
             ></image>
         </view>
 
-        <view class="text-lg text-grey text-price" >{{ item.sum }}</view>
+        <view class="text-lg text-grey text-price text-cut" >{{ item.sum }}</view>
     </view>
 </view>
 

@@ -6,10 +6,12 @@
 
 <calendar cur-year="{{curYear}}" cur-month="{{curMonth}}" day="{{day}}" header_show='{{header_show}}' next='{{next}}' appear='{{appear}}' closelaststyle='{{closelaststyle}}' colored='{{colored}}' prev='{{prev}}' next='{{next}}' speciallist='{{speciallist}}'
   selectedDate='{{selectedDate}}' mystatus='{{mystatus}}' circle_show="{{false}}" />
+
   <view class="container">
 <image  src="../../image/circle.png" style="height:60rpx;width:60rpx;margin-left:50rpx"></image>
 <view style="margin-top:14rpx;margin-left:10rpx">我的值日天</view>
 </view>
+
 <view class="btnview">
   <view class="flex justify-center margin-bottom-lg">
     <button type="" style="width:475rpx;background-color: #6c9;" class="cu-btn bg-olive round lg shadow" bindtap="showModalDuty">值日周期</button>
@@ -18,33 +20,33 @@
 
   <view class="cu-item bg-white solid-bottom margin-top"  >
     <radio-group class="block" >
-    
+
         <view class="cu-form-group flex" style="height:130rpx">
             <view class="title">值日周期</view>
             <view class="flex align-center margin-left-df">
                 <radio class="green "  bindtap="radio1Change"></radio>
                 <view class="margin-left-lg text-olive">固定日期</view>
                 <radio class="green margin-left-sm"bindtap="radio2Change"></radio>
-               
+
                  <picker-view wx:if="{{showPicker}}" indicator-style="height: 20px;" style="height:120rpx;width:40rpx;font-size:15px;margin-right:0rpx" class="color" value="{{value}}" bindchange="bindChange">
                 <picker-view-column>
                   <view wx:for="{{array}}" style="line-height: 50rpx">{{item}}</view>
                 </picker-view-column>
               </picker-view>
              <view wx:if="{{showPicker}}" class="margin-left-lg text-olive" >天1人</view>
-               
+
                 <view wx:if="{{!showPicker}}" class="margin-left-lg text-olive" >{{arrayValue}}天1人</view>
             </view>
         </view>
     </radio-group>
 </view>
-  
-    
-       
+
+
+
         <view class='line' ></view>
       <view class="container">
         <view style="padding-left:35rpx;padding-right:60rpx;margin-top:70rpx">值日生</view>
-    
+
 
           <scroll-view scroll-x class="justify-center" style="width:560rpx;height:300rpx;white-space: nowrap;padding-top:50rpx;">
            <view class="members" style="height:250rpx" wx:if="{{imageUrl[0]}}">
@@ -62,7 +64,7 @@
                     <view wx:for="{{arr1}}" style="line-height: 50rpx">{{item}}</view>
                   </picker-view-column>
                 </picker-view>
-             
+
            </view>
            <view class="members" style="height:250rpx" wx:if="{{imageUrl[2]}}" >
               <image  src="{{imageUrl[2]}}" class="avatar" bindtap="choose"></image>
@@ -112,20 +114,20 @@
                   </picker-view-column>
                 </picker-view>
           </view>
-            
-           
+
+
           </scroll-view>
              </view>
 
-          
-          
+
+
 
       <view class='btnview' style="bottom:0rpx">
         <view class="flex justify-center margin-bottom-lg">
           <button type="" style="width:475rpx;background-color: #6c9;" class="cu-btn bg-olive round lg shadow" bindtap='closeModalDuty'>完成</button>
         </view>
       </view>
-   
+
 
 
 
